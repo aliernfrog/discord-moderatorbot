@@ -34,13 +34,20 @@ module.exports = {
     return ret;
   },
 
-  inform(message, options, deleteAfter) {
-    message.reply(options).then(reply => {
-      setTimeout(() => {
-        reply.delete();
-        message.delete();
-      }, deleteAfter || config.defaultInformTimeout);
-    });
+  async inform(message, options, deleteAfter, instantDelete) {
+    let reply = {};
+    if (instantDelete) {
+      if (options.content) options.content = `${message.author}, ${options.content}`;
+      else options = `${message.author}, ${options}`;
+      reply = await message.channel.send(options);
+    } else {
+      reply = await message.reply(options);
+    }
+    if (instantDelete) await message.delete();
+    setTimeout(() => {
+      if (!instantDelete) message.delete();
+      reply.delete();
+    }, deleteAfter || config.defaultInformTimeout);
   },
 
   hasMedia(message) {

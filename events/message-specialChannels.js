@@ -8,7 +8,7 @@ module.exports = {
     if (!channel) return;
     if (!client.f.checkPerms(client.user, message.channel, "MANAGE_MESSAGES")) return;
 
-    message.inform = (options, deleteAfter) => client.f.inform(message, options, deleteAfter);
+    message.inform = (options, deleteAfter, instantDelete) => client.f.inform(message, options, deleteAfter, instantDelete);
     message.author.moderator = client.f.checkPerms(message.author, message.channel, "MANAGE_MESSAGES");
 
     if (channel.mediaOnly && !message.author.moderator && !client.f.hasMedia(message)) return message.inform("This channel is media-only");
@@ -21,7 +21,7 @@ module.exports = {
       if (Date.now() < nextMsg) {
         const timestamp = `<t:${Math.floor(nextMsg/1000)}:F>`;
         const msg = (channel.cooldown.message || config.defaultCooldownMessage).replace("%TIME%", timestamp);    
-        message.inform(msg);
+        message.inform(msg, undefined, true);
       } else {
         await client.db.setUserCooldown(message.author.id, {
           channel: message.channel.id,
