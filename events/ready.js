@@ -4,6 +4,6 @@ module.exports = {
     client.user.setActivity(`${client.guilds.cache.size} servers`, {type:"WATCHING"});
     console.log(`${client.user.tag} | ${client.guilds.cache.size} guilds`);
 
-    process.on("uncaughtException", err => client.f.err(client, err));
+    process.on("uncaughtException", err => console.log(err));
   }
 }
