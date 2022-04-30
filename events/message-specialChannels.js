@@ -14,7 +14,7 @@ module.exports = {
     if (channel.mediaOnly && !message.author.moderator && !client.f.hasMedia(message)) return message.inform("This channel is media-only");
     if (channel.linksOnly && !message.author.moderator && !client.f.hasLink(message)) return message.inform("This channel is links-only");
     
-    if (channel.cooldown && channel.cooldown.duration) {
+    if (channel.cooldown && channel.cooldown.duration && !message.author.moderator) {
       const data = await client.db.getUserCooldown(message.author.id, message.channel.id);
       const lastMsg = data.lastMsg || 0;
       const nextMsg = parseInt(lastMsg)+parseInt(channel.cooldown.duration);
