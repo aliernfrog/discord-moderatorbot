@@ -48,6 +48,10 @@ module.exports = {
     return true;
   },
 
+  hasLink(message) {
+    return message.content.includes("http://") || message.content.includes("https://") || message.content.includes("discord.gg");
+  },
+
   getFileName(str) {
     const split = str.split(".");
     split.pop();

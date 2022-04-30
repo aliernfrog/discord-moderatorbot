@@ -25,6 +25,7 @@ Advanced cooldowns for channels, supports any duration
 module.exports = {
   id: String, //id of the channel
   mediaOnly: Boolean, //deletes messages that don't have attachments
+  linksOnly: Boolean, //deletes messages that don't have links
   cooldown: {
     duration: 60000, //duration of cooldown in miliseconds
     message: "Custom message" //custom message, uses default if not defined

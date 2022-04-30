@@ -12,6 +12,7 @@ module.exports = {
     message.author.moderator = client.f.checkPerms(message.author, message.channel, "MANAGE_MESSAGES");
 
     if (channel.mediaOnly && !message.author.moderator && !client.f.hasMedia(message)) return message.inform("This channel is media-only");
+    if (channel.linksOnly && !message.author.moderator && !client.f.hasLink(message)) return message.inform("This channel is links-only");
     
     if (channel.cooldown && channel.cooldown.duration) {
       const data = await client.db.getUserCooldown(message.author.id, message.channel.id);
