@@ -1,0 +1,18 @@
+{
+  "name": "aliernfrog-moderatorbot",
+  "version": "22.04.24",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "mongoose": "^6.3.1",
+    "node": "^17.7.2"
+  }
+}
