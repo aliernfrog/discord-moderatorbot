@@ -33,15 +33,10 @@ module.exports = {
   },
 
   async inform(message, options, deleteAfter, instantDelete) {
-    let reply = {};
-    if (instantDelete) {
-      if (options.content) options.content = `${message.author}, ${options.content}`;
-      else options = `${message.author}, ${options}`;
-      reply = await message.channel.send(options);
-    } else {
-      reply = await message.reply(options);
-    }
-    if (instantDelete) await message.delete();
+    if (options.content) options.content = `${message.author}, ${options.content || ""}`;
+    else options = `${message.author}, ${options || ""}`;
+    const reply = await message.channel.send(options);
+    if (instantDelete) message.delete();
     setTimeout(() => {
       if (!instantDelete) message.delete();
       reply.delete();
