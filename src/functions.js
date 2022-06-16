@@ -4,7 +4,7 @@ const config = require("./config.json");
 
 module.exports = {
   readEvents(client) {
-    const files = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+    const files = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
     files.forEach(file => {
       const event = require(`./events/${file}`);
       const fileName = file.replace(".js","");
@@ -15,7 +15,7 @@ module.exports = {
 
   readSpecialChannels(client) {
     client.specialChannels = new Discord.Collection();
-    const files = fs.readdirSync("./channels").filter(file => file.endsWith(".js"));
+    const files = fs.readdirSync("./src/channels").filter(file => file.endsWith(".js"));
     files.forEach(file => {
       const channel = require(`./channels/${file}`);
       const fileName = file.replace(".js","");

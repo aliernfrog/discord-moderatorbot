@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
-const server = require("./server.js");
-const functions = require("./functions.js");
-const db = require("./db/db.js");
+const server = require("./src/server.js");
+const functions = require("./src/functions.js");
+const db = require("./src/db/db.js");
 
 const client = new Discord.Client({intents: ["GUILDS","GUILD_MEMBERS","GUILD_MESSAGES"]});
 client.f = functions;
