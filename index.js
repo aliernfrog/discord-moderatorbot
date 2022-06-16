@@ -1,9 +1,11 @@
-const Discord = require("discord.js");
+const { Client, Collection } = require("discord.js");
 const server = require("./src/server.js");
 const functions = require("./src/functions.js");
 const db = require("./src/db/db.js");
 
-const client = new Discord.Client({intents: ["GUILDS","GUILD_MEMBERS","GUILD_MESSAGES"]});
+const client = new Client({intents: ["GUILDS","GUILD_MEMBERS","GUILD_MESSAGES"]});
+client.specialChannels = new Collection();
+
 client.f = functions;
 client.db = db;
 

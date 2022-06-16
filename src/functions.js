@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
 
@@ -14,7 +13,6 @@ module.exports = {
   },
 
   readSpecialChannels(client) {
-    client.specialChannels = new Discord.Collection();
     const files = fs.readdirSync("./src/channels").filter(file => file.endsWith(".js"));
     files.forEach(file => {
       const channel = require(`./channels/${file}`);
