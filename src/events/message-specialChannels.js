@@ -1,3 +1,4 @@
+const { MessageEmbed } = require("discord.js");
 const config = require("../config.json");
 
 module.exports = {
@@ -11,8 +12,16 @@ module.exports = {
     message.inform = (options, deleteAfter, instantDelete) => client.f.inform(message, options, deleteAfter, instantDelete);
     message.author.moderator = client.f.checkPerms(message.author, message.channel, "MANAGE_MESSAGES");
 
-    if (channel.mediaOnly && !message.author.moderator && !client.f.hasMedia(message)) return message.inform("This channel is media-only");
-    if (channel.linksOnly && !message.author.moderator && !client.f.hasLink(message)) return message.inform("This channel is links-only");
+    if (channel.mediaOnly && !message.author.moderator && !client.f.hasMedia(message)) {
+      const informOptions = {content: "This channel is media-only"};
+      if (channel.suggestThreads) informOptions.embeds = [new MessageEmbed().setDescription("Use threads to start a discussion on a media")];
+      return message.inform(informOptions);
+    }
+    if (channel.linksOnly && !message.author.moderator && !client.f.hasLink(message)) {
+      const informOptions = {content: "This channel is links-only"};
+      if (channel.suggestThreads) informOptions.embeds = [new MessageEmbed().setDescription("Use threads to start a discussion on a link")];
+      return message.inform(informOptions);
+    }
     
     if (channel.cooldown && channel.cooldown.duration && !message.author.moderator) {
       const data = await client.db.getUserCooldown(message.author.id, message.channel.id);
