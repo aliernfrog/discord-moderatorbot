@@ -3,7 +3,7 @@ A simple Discord moderation bot
 
 # Features
 ### Media-only channels
-Automatically deletes non-media content from specific channels.
+Automatically deletes non-media content in a specific channel
 ### Disable replies
 Automatically deletes replies in a specific channel
 ### Automatically start threads
