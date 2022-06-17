@@ -4,6 +4,8 @@ A simple Discord moderation bot
 # Features
 ### Media-only channels
 Automatically deletes non-media content from specific channels.
+### Disable replies
+Automatically deletes replies in a specific channel
 ### Automatically start threads
 Automatically starts a thread when a new message is sent in a specific channel
 ### Channel cooldowns
@@ -26,7 +28,8 @@ module.exports = {
   id: String, //id of the channel
   mediaOnly: Boolean, //deletes messages that don't have attachments
   linksOnly: Boolean, //deletes messages that don't have links
-  suggestThreads: Boolean, //suggests usage of threads when deleting a message in media-only or links-only channels
+  disableReplies: Boolean, //deletes replies
+  suggestThreads: Boolean, //suggests usage of threads when deleting a message in media-only, links-only channels or when deleting replies
   cooldown: {
     duration: 60000, //duration of cooldown in miliseconds
     message: "Custom message" //custom message, uses default if not defined

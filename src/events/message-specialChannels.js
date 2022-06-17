@@ -22,6 +22,11 @@ module.exports = {
       if (channel.suggestThreads) informOptions.embeds = [new MessageEmbed().setDescription("Use threads to start a discussion on a link")];
       return message.inform(informOptions);
     }
+    if (channel.disableReplies && !message.author.moderator && message.type === "REPLY") {
+      const informOptions = {content: "Replies are disabled in this channel"};
+      if (channel.suggestThreads) informOptions.embeds = [new MessageEmbed().setDescription("Use threads to start a discussion")];
+      return message.inform(informOptions);
+    }
     
     if (channel.cooldown && channel.cooldown.duration && !message.author.moderator) {
       const data = await client.db.getUserCooldown(message.author.id, message.channel.id);
