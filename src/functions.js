@@ -33,6 +33,7 @@ module.exports = {
   },
 
   async inform(message, options, deleteAfter, instantDelete) {
+    if (message.system) return message.delete();
     if (options.content) options.content = `${message.author}, ${options.content || ""}`;
     else options = `${message.author}, ${options || ""}`;
     const reply = await message.channel.send(options);
