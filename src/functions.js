@@ -9,8 +9,8 @@ module.exports = {
       const fileName = file.replace(".js","");
       if (event.once) client.once(event.name, (...args) => event.execute(client, ...args));
       else client.on(event.name, (...args) => event.execute(client, ...args));
-      console.log(`Loaded event: ${fileName}/${event.name}`);
     });
+    console.log(`Loaded ${files.length} events`);
   },
 
   readContextMenus(client) {
@@ -28,8 +28,8 @@ module.exports = {
       const channel = require(`./channels/${file}`);
       const fileName = file.replace(".js","");
       client.specialChannels.set(channel.id, channel);
-      console.log(`Loaded special channel: ${fileName}`);
     });
+    console.log(`Loaded ${client.specialChannels.size} special channels`);
   },
 
   async inform(message, options, deleteAfter, instantDelete) {
