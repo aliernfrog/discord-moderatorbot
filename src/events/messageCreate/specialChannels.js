@@ -1,8 +1,7 @@
 const { MessageEmbed } = require("discord.js");
-const config = require("../config.json");
+const config = require("../../config.json");
 
 module.exports = {
-  name: "messageCreate",
   async execute(client, message) {
     if (message.author.bot) return;
     const channel = client.specialChannels.get(message.channel.id);

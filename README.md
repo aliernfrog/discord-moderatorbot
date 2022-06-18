@@ -14,8 +14,9 @@ Advanced cooldowns for channels, supports any duration
 # Running
 - Clone the repo
 - Set bot token in `index.js`
-- Set MongoDB URI in `db/db.js`
-- Edit the code
+- Set MongoDB URI in `src/db/db.js`
+- Set managers array in `src/events/messageCreate/managerEval.js`
+- (Optional) Edit the code
 - `node index.js`
 
 # Adding a new channel
