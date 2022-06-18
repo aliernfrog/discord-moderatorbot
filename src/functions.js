@@ -7,7 +7,8 @@ module.exports = {
     files.forEach(file => {
       const event = require(`./events/${file}`);
       const fileName = file.replace(".js","");
-      client.on(event.name, (...args) => event.execute(client, ...args));
+      if (event.once) client.once(event.name, (...args) => event.execute(client, ...args));
+      else client.on(event.name, (...args) => event.execute(client, ...args));
       console.log(`Loaded event: ${fileName}/${event.name}`);
     });
   },
