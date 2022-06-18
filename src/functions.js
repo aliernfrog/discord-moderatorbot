@@ -13,6 +13,15 @@ module.exports = {
     });
   },
 
+  readContextMenus(client) {
+    const files = fs.readdirSync("./src/interactions/contextMenus").filter(file => file.endsWith(".js"));
+    files.forEach(file => {
+      const contextMenu = require(`./interactions/contextMenus/${file}`);
+      client.contextMenus.set(contextMenu.name, contextMenu);
+    });
+    console.log(`Loaded ${client.contextMenus.size} context menus`);
+  },
+
   readSpecialChannels(client) {
     const files = fs.readdirSync("./src/channels").filter(file => file.endsWith(".js"));
     files.forEach(file => {

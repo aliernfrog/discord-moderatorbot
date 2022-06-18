@@ -4,12 +4,14 @@ const functions = require("./src/functions.js");
 const db = require("./src/db/db.js");
 
 const client = new Client({intents: ["GUILDS","GUILD_MEMBERS","GUILD_MESSAGES"]});
+client.contextMenus = new Collection();
 client.specialChannels = new Collection();
 
 client.f = functions;
 client.db = db;
 
 client.f.readEvents(client);
+client.f.readContextMenus(client);
 client.f.readSpecialChannels(client);
 
 server.start(client);
