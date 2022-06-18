@@ -14,4 +14,4 @@ client.f.readSpecialChannels(client);
 
 server.start(client);
 client.db.connect();
-client.login(process.env.BOT_TOKEN);
+client.login(process.env.DISCORD_TOKEN);
