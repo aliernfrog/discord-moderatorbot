@@ -6,10 +6,9 @@ module.exports = {
     if (message.author.bot) return;
     const channel = client.specialChannels.get(message.channel.id);
     if (!channel) return;
-    if (!client.f.checkPerms(client.user, message.channel, "MANAGE_MESSAGES")) return;
 
     message.inform = (options, deleteAfter, instantDelete) => client.f.inform(message, options, deleteAfter, instantDelete);
-    message.author.moderator = client.f.checkPerms(message.author, message.channel, "MANAGE_MESSAGES");
+    message.author.moderator = message.channel.permissionsFor(message.author).has("MANAGE_MESSAGES");
 
     if (channel.mediaOnly && !message.author.moderator && !client.f.hasMedia(message)) {
       const informOptions = {content: "This channel is media-only"};

@@ -32,16 +32,6 @@ module.exports = {
     });
   },
 
-  checkPerms(user, channel, perms) {
-    if (!perms) perms = ["SEND_MESSAGES","VIEW_CHANNEL"];
-    perms = [].concat(perms);
-    let ret = true;
-    perms.forEach(perm => {
-      if (!channel.permissionsFor(user).has(perm)) ret = false;
-    });
-    return ret;
-  },
-
   async inform(message, options, deleteAfter, instantDelete) {
     if (options.content) options.content = `${message.author}, ${options.content || ""}`;
     else options = `${message.author}, ${options || ""}`;
