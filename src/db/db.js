@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+const Guild = require("./schemas/Guild.js");
 const User = require("./schemas/User.js");
 
 function connect(client) {
@@ -7,14 +8,30 @@ function connect(client) {
   console.log("Database connected");
 }
 
+async function guildData(id) {
+  let guild = await Guild.findOne({_id: id});
+  if (!guild) guild = new Guild({_id: id, maps: []});
+  return guild;
+}
+
+async function addMap(mapName, message) {
+  const data = await guildData(message.guild.id);
+  const maps = data.maps || [];
+  if (maps.find(m => m.messageId === message.id)) return;
+  const obj = {
+    messageId: message.id,
+    channelId: message.channel.id,
+    authorId: message.author.id,
+    mapName: mapName
+  }
+  maps.push(obj);
+  data.maps = maps;
+  data.save();
+}
+
 async function userData(id) {
   let user = await User.findOne({_id: id});
-  if (!user) {
-    user = new User({
-      _id: id,
-      cooldowns: []
-    });
-  }
+  if (!user) user = new User({_id: id, cooldowns: []});
   return user;
 }
 
@@ -45,6 +62,8 @@ function findCooldownIndex(array, channel) {
 }
 
 module.exports.connect = connect;
+module.exports.guildData = guildData;
+module.exports.addMap = addMap;
 module.exports.userData = userData;
 module.exports.getUserCooldown = getUserCooldown;
 module.exports.setUserCooldown = setUserCooldown;

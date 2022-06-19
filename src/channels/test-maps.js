@@ -14,9 +14,11 @@ module.exports = {
     if (images.length > 3 && !message.author.moderator) return message.inform("Maximum 3 screenshots are allowed");
 
     if (maps[0] && images[0]) {
+      const mapName = client.f.getFileName(maps[0].name);
+      await client.db.addMap(mapName, message);
       await message.react("<:upvote:968963540117512252>");
       await message.react("<:downvote:968963600611934259>");
-      if (!message.hasThread) message.startThread({name: client.f.getFileName(maps[0].name)});
+      if (!message.hasThread) message.startThread({name: mapName});
     }
   }
 }
