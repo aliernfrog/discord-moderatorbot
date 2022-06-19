@@ -1,4 +1,4 @@
-const mapExtensions = [".txt",".zip",".rar"];
+const mapExtensions = [".zip"];
 const imageExtensions = [".png",".webp",".jpg",".jpeg"];
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
     const maps = attachments.filter(attachment => mapExtensions.some(extension => attachment.name.toLowerCase().endsWith(extension)));
     const images = attachments.filter(attachment => imageExtensions.some(extension => attachment.name.toLowerCase().endsWith(extension)));
 
-    if (maps.length < 1 && !message.author.moderator) return message.inform("You need to post the map file");
+    if (maps.length < 1 && !message.author.moderator) return message.inform(`You need to post map file (${mapExtensions.join("|")})`);
     if (maps.length > 1 && !message.author.moderator) return message.inform("You can't post multiple map files in the same message");
     if (images.length < 1 && !message.author.moderator) return message.inform("You need to post 1-3 screenshots of your map");
     if (images.length > 3 && !message.author.moderator) return message.inform("Maximum 3 screenshots are allowed");
