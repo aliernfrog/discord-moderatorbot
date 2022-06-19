@@ -25,6 +25,18 @@ module.exports = {
     console.log(`Loaded ${client.commands.size} commands`);
   },
 
+  readSubcommands(client) {
+    const folders = fs.readdirSync("./src/interactions/subcommands");
+    folders.forEach(folder => {
+      const files = fs.readdirSync(`./src/interactions/subcommands/${folder}`).filter(file => file.endsWith(".js"));
+      files.forEach(file => {
+        const subcommand = require(`./interactions/subcommands/${folder}/${file}`);
+        client.subcommands.set(`${folder}/${subcommand.name}`, subcommand);
+      });
+    });
+    console.log(`Loaded ${client.subcommands.size} subcommands`);
+  },
+
   readContextMenus(client) {
     const files = fs.readdirSync("./src/interactions/contextMenus").filter(file => file.endsWith(".js"));
     files.forEach(file => {

@@ -1,6 +1,7 @@
 module.exports = {
   execute(client, interaction) {
-    const command = client.commands.get(interaction.commandName);
+    let command = client.commands.get(interaction.commandName);
+    if (interaction.options.getSubcommand(false)) command = client.subcommands.get(`${command.data.name}/${interaction.options.getSubcommand()}`);
     if (!command) return interaction.reply({content: "Unknown command", ephemeral: true});
 
     if (command.guildOnly && !interaction.guild) return interaction.reply({content: "This command is guild-only", ephemeral: true});
