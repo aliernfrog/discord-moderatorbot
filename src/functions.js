@@ -13,6 +13,18 @@ module.exports = {
     console.log(`Loaded ${files.length} events`);
   },
 
+  readCommands(client) {
+    const folders = fs.readdirSync("./src/interactions/commands");
+    folders.forEach(folder => {
+      const files = fs.readdirSync(`./src/interactions/commands/${folder}`).filter(file => file.endsWith(".js"));
+      files.forEach(file => {
+        const command = require(`./interactions/commands/${folder}/${file}`);
+        client.commands.set(command.data.name, command);
+      });
+    });
+    console.log(`Loaded ${client.commands.size} commands`);
+  },
+
   readContextMenus(client) {
     const files = fs.readdirSync("./src/interactions/contextMenus").filter(file => file.endsWith(".js"));
     files.forEach(file => {
