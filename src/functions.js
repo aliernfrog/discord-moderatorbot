@@ -44,6 +44,16 @@ module.exports = {
     }, deleteAfter || config.defaultInformTimeout);
   },
 
+  async isInGuild(user, guild) {
+    try {
+      const member = await guild.members.fetch(user.id);
+      if (member) return true;
+      else return false;
+    } catch (e) {
+      return false;
+    }
+  },
+
   hasMedia(message) {
     if (!message.attachments.size) return false;
     return true;
