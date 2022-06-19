@@ -1,6 +1,8 @@
 module.exports = {
-  name: "Emit message",
-  type: "MESSAGE",
+  data: {
+    name: "Emit message",
+    type: "MESSAGE"
+  },
   guildOnly: true,
   permissions: ["MANAGE_MESSAGES"],
   execute(client, interaction) {
