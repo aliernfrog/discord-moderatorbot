@@ -4,6 +4,19 @@ module.exports = {
     description: "Remove a map",
     options: [
       {
+        name: "by-author",
+        description: "Remove a map by author ID",
+        type: "SUB_COMMAND",
+        options: [
+          {
+            name: "id",
+            description: "User ID",
+            type: "STRING",
+            required: true
+          }
+        ]
+      },
+      {
         name: "by-message",
         description: "Remove a map by message ID",
         type: "SUB_COMMAND",
