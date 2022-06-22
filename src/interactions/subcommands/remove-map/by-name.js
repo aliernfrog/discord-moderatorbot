@@ -1,5 +1,6 @@
 module.exports = {
   name: "by-name",
+  guildOnly: true,
   permissions: ["MANAGE_MESSAGES"],
   async execute(client, interaction) {
     const name = interaction.options.getString("name");

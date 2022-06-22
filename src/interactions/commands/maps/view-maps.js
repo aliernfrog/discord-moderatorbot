@@ -5,6 +5,7 @@ module.exports = {
     name: "view-maps",
     description: "View maps array"
   },
+  guildOnly: true,
   permissions: ["MANAGE_MESSAGES"],
   async execute(client, interaction) {
     const data = await client.db.guildData(interaction.guild.id);

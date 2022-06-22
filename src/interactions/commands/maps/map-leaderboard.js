@@ -10,6 +10,7 @@ module.exports = {
       }
     ]
   },
+  guildOnly: true,
   permissions: ["MANAGE_MESSAGES"],
   async execute(client, interaction) {
     const postPublicly = interaction.options.getBoolean("post-publicly") || false;
