@@ -97,22 +97,26 @@ module.exports = {
   async generateLeaderboard(client, guildId) {
     const data = await client.db.guildData(guildId);
     const maps = data.maps || [];
+    const starred = [];
     const leaders = [];
     for (i = 0; i < maps.length; i++) {
       try {
         const map = maps[i];
         const channel = await client.channels.fetch(map.channelId);
         const message = await channel.messages.fetch(map.messageId, {force: true});
-        if (!message) return;
-        const upvotes = message.reactions.resolve("968963540117512252").count || 0;
-        const downvotes = message.reactions.resolve("968963600611934259").count || 0;
+        const upvotes = message.reactions.resolve("968963540117512252")?.count || 0;
+        const downvotes = message.reactions.resolve("968963600611934259")?.count || 0;
+        const stars = message.reactions.resolve("⭐")?.count || 0;
         map.totalVotes = upvotes-downvotes;
         map.link = `https://discord.com/channels/${guildId}/${map.channelId}/${map.messageId}`;
-        if (map.totalVotes > 0) leaders.push(map);
+        if (stars > 0) starred.push(map);
+        else if (map.totalVotes > 0) leaders.push(map);
       } catch (e) {}
     }
-    leaders.sort((a,b) => b.totalVotes-a.totalVotes);
     const embed = new MessageEmbed().setTitle("🏆 Map leaderboard");
+    starred.sort((a,b) => b.totalVotes-a.totalVotes);
+    leaders.sort((a,b) => b.totalVotes-a.totalVotes);
+    starred.forEach(map => embed.addField(`⭐ **${map.mapName}** - ${map.totalVotes} votes - by <@${map.authorId}>`, `[View map](${map.link})`));
     leaders.forEach(map => embed.addField(`• **${map.mapName}** - ${map.totalVotes} votes - by <@${map.authorId}>`, `[View map](${map.link})`));
     return embed;
   }
