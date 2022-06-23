@@ -41,6 +41,19 @@ module.exports = {
             required: true
           }
         ]
+      },
+      {
+        name: "clear",
+        description: "Clears maps array, can NOT be undone",
+        type: "SUB_COMMAND",
+        options: [
+          {
+            name: "confirm",
+            description: "Confirm the action, can NOT be undone",
+            type: "BOOLEAN",
+            required: true
+          }
+        ]
       }
     ]
   }
