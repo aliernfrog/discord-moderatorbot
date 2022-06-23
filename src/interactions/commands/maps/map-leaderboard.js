@@ -18,7 +18,7 @@ module.exports = {
     
     if (postPublicly) {
       await interaction.channel.send({embeds: [embed]});
-      interaction.reply({content: "Success!", ephemeral: true});
+      interaction.reply({content: "Success! Run `/remove-map clear` to prepare for the next leaderboard", ephemeral: true});
     } else { 
       interaction.reply({embeds: [embed], ephemeral: true});
     }
