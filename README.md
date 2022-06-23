@@ -1,4 +1,4 @@
-# discord-moderatorbot
+# closetmod
 A simple Discord moderation bot
 
 # Features
