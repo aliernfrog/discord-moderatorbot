@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const fetch = require("node-fetch")
 const config = require("../../config.json");
 const managers = process.env.MANAGERS.split("_");
 
@@ -8,6 +9,10 @@ module.exports = {
     if (!managers.includes(message.author.id)) return;
 
     const code = message.content.replace(config.evalPrefix, "");
-    eval(code);
+    try {
+      eval(code);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
