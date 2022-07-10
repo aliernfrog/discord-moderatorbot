@@ -1,5 +1,5 @@
 module.exports = {
-  id: "855260876448595978",
+  id: "855252745669181490",
   mediaOnly: true,
   suggestThreads: true
 }
