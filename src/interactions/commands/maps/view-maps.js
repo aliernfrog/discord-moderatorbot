@@ -3,7 +3,7 @@ const { MessageAttachment, MessageEmbed } = require("discord.js");
 module.exports = {
   data: {
     name: "view-maps",
-    description: "View maps array"
+    description: "Sends maps array as an ephemeral message"
   },
   guildOnly: true,
   permissions: ["MANAGE_MESSAGES"],

@@ -1,11 +1,11 @@
 module.exports = {
   data: {
     name: "remove-map",
-    description: "Remove a map",
+    description: "Removes a map",
     options: [
       {
         name: "by-author",
-        description: "Remove a map by author ID",
+        description: "Removes a map by author ID, can NOT be undone",
         type: "SUB_COMMAND",
         options: [
           {
@@ -18,7 +18,7 @@ module.exports = {
       },
       {
         name: "by-message",
-        description: "Remove a map by message ID",
+        description: "Removes a map by message ID, can NOT be undone",
         type: "SUB_COMMAND",
         options: [
           {
@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         name: "by-name",
-        description: "Remove a map by map name",
+        description: "Removes a map by map name, can NOT be undone",
         type: "SUB_COMMAND",
         options: [
           {
