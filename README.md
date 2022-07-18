@@ -1,7 +1,7 @@
 # closetmod
 A simple Discord moderation bot
 
-# Features
+## Features
 ### Media-only channels
 Automatically deletes non-media content in a specific channel
 ### Disable replies
@@ -11,7 +11,7 @@ Automatically starts a thread when a new message is sent in a specific channel
 ### Channel cooldowns
 Advanced cooldowns for channels, supports any duration
 
-# Running
+## Running
 - Clone the repo
 - Set bot token in `index.js`
 - Set MongoDB URI in `src/db/db.js`
@@ -19,11 +19,11 @@ Advanced cooldowns for channels, supports any duration
 - (Optional) Edit the code
 - `node index.js`
 
-# Adding a new channel
+## Adding a new channel
 - Create a new file called `myChannel.js` in `channels` folder
 - Use [channel file template](#channel-file) and edit it
 
-# Channel file
+## Channel file
 ```js
 module.exports = {
   id: String, //id of the channel
@@ -35,7 +35,17 @@ module.exports = {
     duration: 60000, //duration of cooldown in miliseconds
     message: "Custom message" //custom message, uses default if not defined
   },
-  autoThread: StartThreadOptions, //automatically starts a thread when a message is sent, see https://discord.js.org/#/docs/discord.js/stable/typedef/StartThreadOptions
+  autoThread: StartThreadOptions, //automatically starts a thread when a message is sent, see https://discord.js.org/#/docs/discord.js/v13/typedef/StartThreadOptions
   execute(client, message) {...} //will be executed when a new message is sent
+}
+```
+
+## Command file
+```js
+module.exports = {
+  data: ApplicationCommandData, //see https://discord.js.org/#/docs/discord.js/v13/typedef/ApplicationCommandData
+  guildOnly: Boolean, //only allows the command in guilds
+  permissions: PermissionResolvable, //permission user needs to use the command, see https://discord.js.org/#/docs/discord.js/v13/typedef/PermissionResolvable
+  execute(client, interaction) {...} //will be executed when user runs the command
 }
 ```
