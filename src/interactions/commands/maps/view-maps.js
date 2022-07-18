@@ -1,4 +1,4 @@
-const { MessageAttachment, MessageEmbed } = require("discord.js");
+const { MessageAttachment, MessageEmbed, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: {
@@ -6,7 +6,7 @@ module.exports = {
     description: "Sends maps array as an ephemeral message"
   },
   guildOnly: true,
-  permissions: ["MANAGE_MESSAGES"],
+  permissions: [PermissionFlagsBits.ManageMessages],
   async execute(client, interaction) {
     const data = await client.db.guildData(interaction.guild.id);
     const maps = data.maps || [];
