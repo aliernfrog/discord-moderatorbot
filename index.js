@@ -1,5 +1,6 @@
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const server = require("./src/server.js");
+const config = require("./src/config.js");
 const functions = require("./src/functions.js");
 const db = require("./src/db/db.js");
 
@@ -20,4 +21,4 @@ client.f.readSpecialChannels(client);
 
 server.start(client);
 client.db.connect();
-client.login(process.env.DISCORD_TOKEN);
+client.login(config.token);

@@ -1,12 +1,11 @@
 const Discord = require("discord.js");
 const fetch = require("node-fetch");
-const config = require("../../config.json");
-const managers = process.env.MANAGERS.split("_");
+const config = require("../../config.js");
 
 module.exports = {
   execute(client, message) {
     if (!message.content.startsWith(config.evalPrefix)) return;
-    if (!managers.includes(message.author.id)) return;
+    if (!config.managers.includes(message.author.id)) return;
 
     const code = message.content.replace(config.evalPrefix, "");
     try {
