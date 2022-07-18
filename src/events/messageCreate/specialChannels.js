@@ -1,4 +1,4 @@
-const { MessageEmbed, PermissionFlagsBits } = require("discord.js");
+const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 const config = require("../../config.js");
 
 module.exports = {
@@ -14,17 +14,17 @@ module.exports = {
 
     if (channel.mediaOnly && !message.author.moderator && !client.f.hasMedia(message)) {
       const informOptions = {content: "This channel is media-only"};
-      if (channel.suggestThreads) informOptions.embeds = [new MessageEmbed().setDescription("Use threads to start a discussion on a media")];
+      if (channel.suggestThreads) informOptions.embeds = [new EmbedBuilder().setDescription("Use threads to start a discussion on a media")];
       return message.inform(informOptions);
     }
     if (channel.linksOnly && !message.author.moderator && !client.f.hasLink(message)) {
       const informOptions = {content: "This channel is links-only"};
-      if (channel.suggestThreads) informOptions.embeds = [new MessageEmbed().setDescription("Use threads to start a discussion on a link")];
+      if (channel.suggestThreads) informOptions.embeds = [new EmbedBuilder().setDescription("Use threads to start a discussion on a link")];
       return message.inform(informOptions);
     }
     if (channel.disableReplies && !message.author.moderator && message.type === "REPLY") {
       const informOptions = {content: "Replies are disabled in this channel"};
-      if (channel.suggestThreads) informOptions.embeds = [new MessageEmbed().setDescription("Use threads to start a discussion")];
+      if (channel.suggestThreads) informOptions.embeds = [new EmbedBuilder().setDescription("Use threads to start a discussion")];
       return message.inform(informOptions);
     }
     
