@@ -1,4 +1,4 @@
-const { MessageAttachment, MessageEmbed } = require("discord.js");
+const { AttachmentBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: {
@@ -6,17 +6,17 @@ module.exports = {
     description: "Sends maps array as an ephemeral message"
   },
   guildOnly: true,
-  permissions: ["MANAGE_MESSAGES"],
+  permissions: [PermissionFlagsBits.ManageMessages],
   async execute(client, interaction) {
     const data = await client.db.guildData(interaction.guild.id);
     const maps = data.maps || [];
     const string = JSON.stringify(maps, null, 1);
     if (string.length <= 4084) {
-      const embed = new MessageEmbed().setDescription("```js\n"+string+"\n```");
+      const embed = new EmbedBuilder().setDescription("```js\n"+string+"\n```");
       interaction.reply({embeds: [embed], ephemeral: true});
     } else {
       const buffer = Buffer.from(string, "utf-8");
-      const file = new MessageAttachment(buffer, "maps.json");
+      const file = new AttachmentBuilder(buffer, "maps.json");
       interaction.reply({files: [file], ephemeral: true});
     }
   }

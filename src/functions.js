@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");
 const config = require("./config.json");
 
@@ -104,11 +104,13 @@ module.exports = {
         else if (map.totalVotes > 0) leaders.push(map);
       } catch (e) {}
     }
-    const embed = new MessageEmbed().setTitle("🏆 Map leaderboard");
+    const embed = new EmbedBuilder().setTitle("🏆 Map leaderboard");
+    const fields = [];
     starred.sort((a,b) => b.totalVotes-a.totalVotes);
     leaders.sort((a,b) => b.totalVotes-a.totalVotes);
-    starred.forEach(map => embed.addField(`⭐ **${map.mapName}** - ${map.totalVotes} votes - by <@${map.authorId}>`, `[View map](${map.link})`));
-    leaders.forEach(map => embed.addField(`• **${map.mapName}** - ${map.totalVotes} votes - by <@${map.authorId}>`, `[View map](${map.link})`));
+    starred.forEach(map => fields.push({name: `⭐ **${map.mapName}** - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
+    leaders.forEach(map => fields.push({name: `• **${map.mapName}** - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
+    embed.addFields(fields);
     return embed;
   }
 }

@@ -1,3 +1,5 @@
+const { ApplicationCommandOptionType, PermissionFlagsBits } = require("discord.js");
+
 module.exports = {
   data: {
     name: "map-leaderboard",
@@ -6,12 +8,12 @@ module.exports = {
       {
         name: "post-publicly",
         description: "Post the message publicly, false by default",
-        type: "BOOLEAN"
+        type: ApplicationCommandOptionType.Boolean
       }
     ]
   },
   guildOnly: true,
-  permissions: ["MANAGE_MESSAGES"],
+  permissions: [PermissionFlagsBits.ManageMessages],
   async execute(client, interaction) {
     const postPublicly = interaction.options.getBoolean("post-publicly") || false;
     const embed = await client.f.generateLeaderboard(client, interaction.guild.id);

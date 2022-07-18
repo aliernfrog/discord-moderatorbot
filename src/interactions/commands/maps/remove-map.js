@@ -1,3 +1,5 @@
+const { ApplicationCommandOptionType } = require("discord.js");
+
 module.exports = {
   data: {
     name: "remove-map",
@@ -6,12 +8,12 @@ module.exports = {
       {
         name: "by-author",
         description: "Removes a map by author ID, can NOT be undone",
-        type: "SUB_COMMAND",
+        type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "id",
             description: "User ID",
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
           }
         ]
@@ -19,12 +21,12 @@ module.exports = {
       {
         name: "by-message",
         description: "Removes a map by message ID, can NOT be undone",
-        type: "SUB_COMMAND",
+        type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "id",
             description: "Message ID",
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
           }
         ]
@@ -32,12 +34,12 @@ module.exports = {
       {
         name: "by-name",
         description: "Removes a map by map name, can NOT be undone",
-        type: "SUB_COMMAND",
+        type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "name",
             description: "Map name",
-            type: "STRING",
+            type: ApplicationCommandOptionType.String,
             required: true
           }
         ]
@@ -45,12 +47,12 @@ module.exports = {
       {
         name: "clear",
         description: "Clears maps array, can NOT be undone",
-        type: "SUB_COMMAND",
+        type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "confirm",
             description: "Confirm the action, can NOT be undone",
-            type: "BOOLEAN",
+            type: ApplicationCommandOptionType.Boolean,
             required: true
           }
         ]

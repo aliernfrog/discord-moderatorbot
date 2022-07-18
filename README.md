@@ -22,7 +22,7 @@ module.exports = {
     duration: 60000, //duration of cooldown in miliseconds
     message: "Custom message" //custom message, uses default if not defined
   },
-  autoThread: StartThreadOptions, //automatically starts a thread when a message is sent, see https://discord.js.org/#/docs/discord.js/v13/typedef/StartThreadOptions
+  autoThread: StartThreadOptions, //automatically starts a thread when a message is sent, see https://discord.js.org/#/docs/discord.js/main/typedef/StartThreadOptions
   execute(client, message) {...} //will be executed when a new message is sent
 }
 ```
@@ -32,9 +32,9 @@ module.exports = {
 subcommands: `src/interactions/subcommands/parentCommand/someSubcommand.js`
 ```js
 module.exports = {
-  data: ApplicationCommandData, //see https://discord.js.org/#/docs/discord.js/v13/typedef/ApplicationCommandData
+  data: ApplicationCommandData, //see https://discord.js.org/#/docs/discord.js/main/typedef/ApplicationCommandData
   guildOnly: Boolean, //only allows the command in guilds
-  permissions: PermissionResolvable, //permission user needs to use the command, see https://discord.js.org/#/docs/discord.js/v13/typedef/PermissionResolvable
+  permissions: PermissionResolvable, //permission user needs to use the command, see https://discord.js.org/#/docs/discord.js/main/typedef/PermissionResolvable
   execute(client, interaction) {...} //will be executed when user runs the command
 }
 ```

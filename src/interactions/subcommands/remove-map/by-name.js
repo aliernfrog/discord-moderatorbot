@@ -1,7 +1,9 @@
+const { PermissionFlagsBits } = require("discord.js");
+
 module.exports = {
   name: "by-name",
   guildOnly: true,
-  permissions: ["MANAGE_MESSAGES"],
+  permissions: [PermissionFlagsBits.ManageMessages],
   async execute(client, interaction) {
     const name = interaction.options.getString("name");
     const data = await client.db.guildData(interaction.guild.id);
