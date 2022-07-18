@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, PermissionFlagsBits } = require("discord.js");
 const config = require("../../config.json");
 
 module.exports = {
@@ -10,7 +10,7 @@ module.exports = {
     message.inform = (options, deleteAfter, instantDelete) => client.f.inform(message, options, deleteAfter, instantDelete);
     
     const authorInGuild = await client.f.isInGuild(message.author, message.guild);
-    message.author.moderator = authorInGuild && message.channel.permissionsFor(message.author).has("MANAGE_MESSAGES");
+    message.author.moderator = authorInGuild && message.channel.permissionsFor(message.author).has(PermissionFlagsBits.ManageMessages);
 
     if (channel.mediaOnly && !message.author.moderator && !client.f.hasMedia(message)) {
       const informOptions = {content: "This channel is media-only"};
