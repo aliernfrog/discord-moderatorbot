@@ -1,15 +1,15 @@
 # closetmod
 A simple Discord moderation bot
 
-# ⚙️ Running
+## ⚙️ Running
 - Clone the repo
-- Set bot token in `index.js`
-- Set MongoDB URI in `src/db/db.js`
-- Set managers array in `src/events/messageCreate/managerEval.js`
+- Edit `src/config.js`
 - (Optional) Edit the code
 - `node index.js`
 
-## #️⃣ Channel file
+
+
+### #️⃣ Channel file
 `src/channels/someChannel.js`
 ```js
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
 }
 ```
 
-## ⌨️ Command file
+### ⌨️ Command file
 `src/interactions/commands/someFolder/someCommand.js`<br>
 subcommands: `src/interactions/subcommands/parentCommand/someSubcommand.js`
 ```js
