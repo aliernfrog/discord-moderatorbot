@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
+const config = require("../config.js");
 
 const Guild = require("./schemas/Guild.js");
 const User = require("./schemas/User.js");
 
 function connect(client) {
-  mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+  mongoose.connect(config.dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
   console.log("Database connected");
 }
 
