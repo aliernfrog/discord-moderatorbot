@@ -7,9 +7,7 @@ A simple Discord moderation bot
 - (Optional) Edit the code
 - `node index.js`
 
-
-
-### #️⃣ Channel file
+## #️⃣ Channel file
 `src/channels/someChannel.js`
 ```js
 module.exports = {
@@ -27,7 +25,7 @@ module.exports = {
 }
 ```
 
-### ⌨️ Command file
+## ⌨️ Command file
 `src/interactions/commands/someFolder/someCommand.js`<br>
 subcommands: `src/interactions/subcommands/parentCommand/someSubcommand.js`
 ```js
