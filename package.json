@@ -1,18 +1,14 @@
 {
   "name": "aliernfrog-closetmod",
   "version": "22.07.18",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.0.2",
-    "mongoose": "^6.4.4",
+    "discord.js": "^14.0.3",
+    "mongoose": "^6.4.5",
     "node": "^18.5.0",
     "node-fetch": "2.6.7"
   }
