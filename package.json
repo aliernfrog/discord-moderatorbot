@@ -1,6 +1,6 @@
 {
   "name": "aliernfrog-closetmod",
-  "version": "22.07.18",
+  "version": "22.07.26",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "discord.js": "^14.0.3",
-    "mongoose": "^6.4.5",
+    "mongoose": "^6.4.7",
     "node": "^18.5.0",
     "node-fetch": "2.6.7"
   }
