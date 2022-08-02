@@ -1,9 +1,9 @@
-const { EmbedBuilder, PermissionFlagsBits } = require("discord.js");
+const { EmbedBuilder, MessageFlags, PermissionFlagsBits } = require("discord.js");
 const config = require("../../config.js");
 
 module.exports = {
   async execute(client, message) {
-    if (message.author.bot) return;
+    if (message.author.bot && !message.flags.has(MessageFlags.IsCrosspost)) return;
     const channel = client.specialChannels.get(message.channel.id);
     if (!channel) return;
 
