@@ -8,6 +8,11 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
 });
 
+client.rest.on("rateLimited", (data) => {
+  console.log("Rate limited");
+  process.kill(1);
+});
+
 client.commands = new Collection();
 client.subcommands = new Collection();
 client.specialChannels = new Collection();
