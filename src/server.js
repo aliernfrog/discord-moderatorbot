@@ -10,7 +10,10 @@ function start(client) {
   server.listen(5000, () => {
     console.log("Server running!");
   });
-  setTimeout(() => shouldBeReady = true, 5000);
+  setTimeout(() => {
+    shouldBeReady = true;
+    if (!client.isReady()) process.kill(1);
+  }, 10000);
 }
 
 function listen(req, res, client) {

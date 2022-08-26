@@ -9,8 +9,7 @@ const client = new Client({
 });
 
 client.rest.on("rateLimited", (data) => {
-  console.log("Rate limited");
-  process.kill(1);
+  if (data.timeout > 10000) process.kill(1);
 });
 
 client.commands = new Collection();
