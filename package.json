@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "discord.js": "^14.3.0",
+    "discord.js": "^14.4.0",
     "mongoose": "^6.6.1",
     "node": "^18.9.0",
     "node-fetch": "2.6.7"
