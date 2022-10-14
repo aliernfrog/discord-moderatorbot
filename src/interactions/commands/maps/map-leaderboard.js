@@ -15,16 +15,16 @@ module.exports = {
   guildOnly: true,
   permissions: [PermissionFlagsBits.ManageMessages],
   async execute(client, interaction) {
+    await interaction.deferReply({ephemeral: true});
+
     const postPublicly = interaction.options.getBoolean("post-publicly") || false;
-    await interaction.defer({ephemeral: postPublicly});
-    
     const embed = await client.f.generateLeaderboard(client, interaction.guild.id);
     
     if (postPublicly) {
       await interaction.channel.send({embeds: [embed]});
-      interaction.reply({content: "Success! Run `/remove-map clear` to prepare for the next leaderboard", ephemeral: true});
+      interaction.editReply({content: "Success! Run `/remove-map clear` to prepare for the next leaderboard", ephemeral: true});
     } else { 
-      interaction.reply({embeds: [embed], ephemeral: true});
+      interaction.editReply({embeds: [embed], ephemeral: true});
     }
   }
 }
