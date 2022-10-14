@@ -104,12 +104,12 @@ module.exports = {
         else if (map.totalVotes > 0) leaders.push(map);
       } catch (e) {}
     }
-    const embed = new EmbedBuilder().setTitle("🏆 Map leaderboard");
+    const embed = new EmbedBuilder().setTitle("🏆 Map leaderboard").setColor("Random");
     const fields = [];
     starred.sort((a,b) => b.totalVotes-a.totalVotes);
     leaders.sort((a,b) => b.totalVotes-a.totalVotes);
-    starred.forEach(map => fields.push({name: `⭐ **${map.mapName}** - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
-    leaders.forEach(map => fields.push({name: `• **${map.mapName}** - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
+    starred.forEach(map => fields.push({name: `⭐ \`${map.mapName.replaceAll("`","")}\` - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
+    leaders.forEach(map => fields.push({name: `• \`${map.mapName.replaceAll("`","")}\` - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
     embed.addFields(fields);
     return embed;
   }

@@ -16,6 +16,8 @@ module.exports = {
   permissions: [PermissionFlagsBits.ManageMessages],
   async execute(client, interaction) {
     const postPublicly = interaction.options.getBoolean("post-publicly") || false;
+    await interaction.defer({ephemeral: postPublicly});
+    
     const embed = await client.f.generateLeaderboard(client, interaction.guild.id);
     
     if (postPublicly) {
