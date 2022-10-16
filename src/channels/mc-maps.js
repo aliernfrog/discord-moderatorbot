@@ -1,5 +1,5 @@
 const mapExtensions = [".txt",".zip",".rar"];
-const imageExtensions = [".png",".webp",".jpg",".jpeg"];
+const imageExtensions = [".png",".webp",".jpg",".jpeg",".gif"];
 
 module.exports = {
   id: "855251762189303848",
