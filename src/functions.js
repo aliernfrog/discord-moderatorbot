@@ -109,7 +109,7 @@ module.exports = {
     starred.sort((a,b) => b.totalVotes-a.totalVotes);
     leaders.sort((a,b) => b.totalVotes-a.totalVotes);
     starred.forEach(map => fields.push({name: `⭐ \`${map.mapName.replaceAll("`","")}\` - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
-    leaders.forEach(map => fields.push({name: `• \`${map.mapName.replaceAll("`","")}\` - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
+    leaders.slice(0,10).forEach(map => fields.push({name: `• \`${map.mapName.replaceAll("`","")}\` - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
     embed.addFields(fields);
     return embed;
   }
