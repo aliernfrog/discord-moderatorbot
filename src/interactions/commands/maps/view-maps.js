@@ -16,7 +16,7 @@ module.exports = {
       interaction.reply({embeds: [embed], ephemeral: true});
     } else {
       const buffer = Buffer.from(string, "utf-8");
-      const file = new AttachmentBuilder(buffer, "maps.json");
+      const file = new AttachmentBuilder(buffer).setName("maps.json");
       interaction.reply({files: [file], ephemeral: true});
     }
   }
