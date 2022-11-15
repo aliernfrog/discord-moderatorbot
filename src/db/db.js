@@ -4,9 +4,11 @@ const config = require("../config.js");
 const Guild = require("./schemas/Guild.js");
 const User = require("./schemas/User.js");
 
-function connect(client) {
-  mongoose.connect(config.dbUri, {useNewUrlParser: true, useUnifiedTopology: true});
-  console.log("Database connected");
+async function connect(client) {
+  return await mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
+    if (err) process.kill(1);
+    else console.log("Database connected");
+  });
 }
 
 async function guildData(id) {
