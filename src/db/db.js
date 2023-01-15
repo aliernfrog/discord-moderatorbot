@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const config = require("../config.js");
+mongoose.set("strictQuery", true);
 
 const Guild = require("./schemas/Guild.js");
 const User = require("./schemas/User.js");
