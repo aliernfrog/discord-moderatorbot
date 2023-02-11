@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "discord.js": "^14.7.1",
-    "mongoose": "^6.8.3",
-    "node": "^19.4.0",
-    "node-fetch": "^2.6.8"
+    "mongoose": "^6.9.1",
+    "node": "^19.6.0",
+    "node-fetch": "^2.6.9"
   }
 }
