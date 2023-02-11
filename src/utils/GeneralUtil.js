@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");
-const config = require("./config.js");
+const config = require("../values/config.js");
 
 module.exports = {
   readEvents(client) {
     const files = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
     files.forEach(file => {
-      const event = require(`./events/${file}`);
+      const event = require(`../events/${file}`);
       const fileName = file.replace(".js","");
       if (event.once) client.once(event.name, (...args) => event.execute(client, ...args));
       else client.on(event.name, (...args) => event.execute(client, ...args));
@@ -19,7 +19,7 @@ module.exports = {
     folders.forEach(folder => {
       const files = fs.readdirSync(`./src/interactions/commands/${folder}`).filter(file => file.endsWith(".js"));
       files.forEach(file => {
-        const command = require(`./interactions/commands/${folder}/${file}`);
+        const command = require(`../interactions/commands/${folder}/${file}`);
         client.commands.set(command.data.name, command);
       });
     });
@@ -31,7 +31,7 @@ module.exports = {
     folders.forEach(folder => {
       const files = fs.readdirSync(`./src/interactions/subcommands/${folder}`).filter(file => file.endsWith(".js"));
       files.forEach(file => {
-        const subcommand = require(`./interactions/subcommands/${folder}/${file}`);
+        const subcommand = require(`../interactions/subcommands/${folder}/${file}`);
         client.subcommands.set(`${folder}/${subcommand.name}`, subcommand);
       });
     });
@@ -41,7 +41,7 @@ module.exports = {
   readSpecialChannels(client) {
     const files = fs.readdirSync("./src/channels").filter(file => file.endsWith(".js"));
     files.forEach(file => {
-      const channel = require(`./channels/${file}`);
+      const channel = require(`../channels/${file}`);
       const fileName = file.replace(".js","");
       client.specialChannels.set(channel.id, channel);
     });

@@ -1,5 +1,5 @@
 const { EmbedBuilder, MessageFlags, PermissionFlagsBits } = require("discord.js");
-const config = require("../../config.js");
+const config = require("../../values/config.js");
 
 module.exports = {
   async execute(client, message) {

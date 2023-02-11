@@ -1,7 +1,7 @@
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
-const server = require("./src/server.js");
-const config = require("./src/config.js");
-const functions = require("./src/functions.js");
+const server = require("./src/utils/ServerUtil.js");
+const config = require("./src/values/config.js");
+const functions = require("./src/utils/GeneralUtil.js");
 const db = require("./src/db/db.js");
 
 const client = new Client({

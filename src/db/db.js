@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const config = require("../config.js");
+const config = require("../values/config.js");
 mongoose.set("strictQuery", true);
 
 const Guild = require("./schemas/Guild.js");
