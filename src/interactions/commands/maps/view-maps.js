@@ -3,7 +3,7 @@ const { AttachmentBuilder, EmbedBuilder, PermissionFlagsBits } = require("discor
 module.exports = {
   data: {
     name: "view-maps",
-    description: "Sends maps array as an ephemeral message",
+    description: "Sends maps array as an ephemeral message.",
     dmPermission: false,
     defaultMemberPermissions: [PermissionFlagsBits.ManageMessages]
   },

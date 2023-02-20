@@ -3,16 +3,16 @@ const { ApplicationCommandOptionType, PermissionFlagsBits } = require("discord.j
 module.exports = {
   data: {
     name: "remove-map",
-    description: "Removes a map",
+    description: "Removes a map.",
     options: [
       {
         name: "by-author",
-        description: "Removes a map by author ID, can NOT be undone",
+        description: "Removes maps by author ID, can not be undone.",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "id",
-            description: "User ID",
+            description: "User ID to delete maps of.",
             type: ApplicationCommandOptionType.String,
             required: true
           }
@@ -20,12 +20,12 @@ module.exports = {
       },
       {
         name: "by-message",
-        description: "Removes a map by message ID, can NOT be undone",
+        description: "Removes a map by message ID, can not be undone.",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "id",
-            description: "Message ID",
+            description: "Message ID of the map.",
             type: ApplicationCommandOptionType.String,
             required: true
           }
@@ -33,12 +33,12 @@ module.exports = {
       },
       {
         name: "by-name",
-        description: "Removes a map by map name, can NOT be undone",
+        description: "Removes maps by map name, can not be undone.",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "name",
-            description: "Map name",
+            description: "Name of the map.",
             type: ApplicationCommandOptionType.String,
             required: true
           }
@@ -46,12 +46,12 @@ module.exports = {
       },
       {
         name: "clear",
-        description: "Clears maps array, can NOT be undone",
+        description: "Removes all maps from maps array, can not be undone.",
         type: ApplicationCommandOptionType.Subcommand,
         options: [
           {
             name: "confirm",
-            description: "Confirm the action, can NOT be undone",
+            description: "Confirm the action, can not be undone.",
             type: ApplicationCommandOptionType.Boolean,
             required: true
           }

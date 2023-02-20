@@ -3,11 +3,11 @@ const { ApplicationCommandOptionType, PermissionFlagsBits } = require("discord.j
 module.exports = {
   data: {
     name: "map-leaderboard",
-    description: "Sends map leaderboard in current channel",
+    description: "Sends map leaderboard in current channel.",
     options: [
       {
         name: "post-publicly",
-        description: "Post the message publicly, false by default",
+        description: "Whether to post the message publicly, false by default.",
         type: ApplicationCommandOptionType.Boolean
       }
     ],
