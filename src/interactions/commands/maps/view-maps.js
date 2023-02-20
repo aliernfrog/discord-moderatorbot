@@ -3,10 +3,10 @@ const { AttachmentBuilder, EmbedBuilder, PermissionFlagsBits } = require("discor
 module.exports = {
   data: {
     name: "view-maps",
-    description: "Sends maps array as an ephemeral message"
+    description: "Sends maps array as an ephemeral message",
+    dmPermission: false,
+    defaultMemberPermissions: [PermissionFlagsBits.ManageMessages]
   },
-  guildOnly: true,
-  permissions: [PermissionFlagsBits.ManageMessages],
   async execute(client, interaction) {
     const data = await client.db.guildData(interaction.guild.id);
     const maps = data.maps || [];

@@ -1,9 +1,5 @@
-const { PermissionFlagsBits } = require("discord.js");
-
 module.exports = {
   name: "clear",
-  guildOnly: true,
-  permissions: [PermissionFlagsBits.ManageMessages],
   async execute(client, interaction) {
     const confirm = interaction.options.getBoolean("confirm");
 

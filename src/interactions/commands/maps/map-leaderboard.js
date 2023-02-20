@@ -10,10 +10,10 @@ module.exports = {
         description: "Post the message publicly, false by default",
         type: ApplicationCommandOptionType.Boolean
       }
-    ]
+    ],
+    dmPermission: false,
+    defaultMemberPermissions: [PermissionFlagsBits.ManageMessages]
   },
-  guildOnly: true,
-  permissions: [PermissionFlagsBits.ManageMessages],
   async execute(client, interaction) {
     await interaction.deferReply({ephemeral: true});
 

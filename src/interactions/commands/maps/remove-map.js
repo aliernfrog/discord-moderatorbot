@@ -1,4 +1,4 @@
-const { ApplicationCommandOptionType } = require("discord.js");
+const { ApplicationCommandOptionType, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: {
@@ -57,6 +57,8 @@ module.exports = {
           }
         ]
       }
-    ]
+    ],
+    dmPermission: false,
+    defaultMemberPermissions: [PermissionFlagsBits.ManageMessages]
   }
 }
