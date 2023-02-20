@@ -13,9 +13,8 @@ async function connect(client) {
 }
 
 async function guildData(id) {
-  let guild = await Guild.findOne({_id: id});
-  if (!guild) guild = new Guild({_id: id, maps: []});
-  return guild;
+  const guild = await Guild.findOne({_id: id});
+  return guild ?? new Guild({_id: id, maps: []});
 }
 
 async function addMap(mapName, message) {
@@ -34,9 +33,8 @@ async function addMap(mapName, message) {
 }
 
 async function userData(id) {
-  let user = await User.findOne({_id: id});
-  if (!user) user = new User({_id: id, cooldowns: []});
-  return user;
+  const user = await User.findOne({_id: id});
+  return user ?? new User({_id: id, cooldowns: []});
 }
 
 async function getUserCooldown(id, channel, returnIndex) {
