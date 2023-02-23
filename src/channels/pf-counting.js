@@ -19,7 +19,9 @@ module.exports = {
     data.counting.lastCount = nextCount;
     data.counting.lastUserId = message.author.id;
 
-    const isMilestone = nextCount == 1 || ((nextCount % 100) === 0);
+    const digits = nextCount.toString().length;
+    const milestoneDivider = 10 ** (digits-1);
+    const isMilestone = nextCount == 1 || (digits >= 3 && ((nextCount % milestoneDivider) === 0));
     if (isMilestone) {
       data.counting.milestones.set(nextCount.toString(), {
         userId: message.author.id,
