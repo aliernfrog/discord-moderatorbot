@@ -1,4 +1,4 @@
-const { EmbedBuilder, MessageFlags, PermissionFlagsBits } = require("discord.js");
+const { EmbedBuilder, MessageFlags, MessageType, PermissionFlagsBits } = require("discord.js");
 const config = require("../../values/config.js");
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
       if (channel.suggestThreads) informOptions.embeds = [new EmbedBuilder().setDescription("Use threads to start a discussion on a link")];
       return message.inform(informOptions);
     }
-    if (channel.disableReplies && !message.author.moderator && message.type === "REPLY") {
+    if (channel.disableReplies && !message.author.moderator && message.type === MessageType.Reply) {
       const informOptions = {content: "Replies are disabled in this channel"};
       if (channel.suggestThreads) informOptions.embeds = [new EmbedBuilder().setDescription("Use threads to start a discussion")];
       return message.inform(informOptions);
