@@ -5,16 +5,18 @@ mongoose.set("strictQuery", true);
 const Guild = require("./schemas/Guild.js");
 const User = require("./schemas/User.js");
 
-async function connect(client) {
-  return await mongoose.connect(process.env.DB_URI, {useNewUrlParser: true, useUnifiedTopology: true}, function(err) {
-    if (err) process.kill(1);
-    else console.log("Database connected");
+async function connect() {
+  await mongoose.connect(process.env.DB_URI).catch(() => {
+    process.kill(1);
   });
+  console.log("Database connected");
 }
 
 async function guildData(id) {
-  const guild = await Guild.findOne({_id: id});
-  return guild ?? new Guild({_id: id, maps: []});
+  return await Guild.findOne({_id: id}) ?? new Guild({
+    _id: id,
+    maps: []
+  });
 }
 
 async function addMap(mapName, message) {
@@ -33,8 +35,10 @@ async function addMap(mapName, message) {
 }
 
 async function userData(id) {
-  const user = await User.findOne({_id: id});
-  return user ?? new User({_id: id, cooldowns: []});
+  return await User.findOne({_id: id}) ?? new User({
+    _id: id,
+    cooldowns: []
+  });
 }
 
 async function getUserCooldown(id, channel, returnIndex) {
