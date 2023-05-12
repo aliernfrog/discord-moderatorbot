@@ -11,7 +11,6 @@ module.exports = {
     if (maps.length < 1 && !message.author.moderator) return message.inform(`You need to post map file (${mapExtensions.join("|")})`);
     if (maps.length > 1 && !message.author.moderator) return message.inform("You can't post multiple map files in the same message");
     if (images.length < 1 && !message.author.moderator) return message.inform("You need to post 1-3 screenshots of your map");
-    if (images.length > 3 && !message.author.moderator) return message.inform("Maximum 3 screenshots are allowed");
 
     if (maps[0] && images[0]) {
       const mapName = client.f.getFileName(maps[0].name);
