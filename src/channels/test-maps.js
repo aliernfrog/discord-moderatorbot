@@ -15,8 +15,8 @@ module.exports = {
     if (maps[0] && images[0]) {
       const mapName = client.f.getFileName(maps[0].name);
       await client.db.addMap(mapName, message);
-      await message.react("<:upvote:968963540117512252>");
-      await message.react("<:downvote:968963600611934259>");
+      await message.react("<:pf_upvote:1118938531872653352>");
+      await message.react("<:pf_downvote:1118938534280179774>");
       if (!message.hasThread) message.startThread({name: mapName});
     }
   }
