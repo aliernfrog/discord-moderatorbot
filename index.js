@@ -15,6 +15,7 @@ client.rest.on("rateLimited", (data) => {
 client.commands = new Collection();
 client.subcommands = new Collection();
 client.specialChannels = new Collection();
+client.specialForums = new Collection();
 client.f = functions;
 client.db = db;
 
@@ -22,6 +23,7 @@ client.f.readEvents(client);
 client.f.readCommands(client);
 client.f.readSubcommands(client);
 client.f.readSpecialChannels(client);
+client.f.readSpecialForums(client);
 
 server.start(client);
 client.db.connect();

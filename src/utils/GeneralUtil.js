@@ -42,10 +42,18 @@ module.exports = {
     const files = fs.readdirSync("./src/channels").filter(file => file.endsWith(".js"));
     files.forEach(file => {
       const channel = require(`../channels/${file}`);
-      const fileName = file.replace(".js","");
       client.specialChannels.set(channel.id, channel);
     });
     console.log(`Loaded ${client.specialChannels.size} special channels`);
+  },
+
+  readSpecialForums(client) {
+    const files = fs.readdirSync("./src/forums").filter(file => file.endsWith(".js"));
+    files.forEach(file => {
+      const forum = require(`../forums/${file}`);
+      client.specialForums.set(forum.id, forum);
+    });
+    console.log(`Loaded ${client.specialForums.size} special forums`);
   },
 
   async inform(message, options, deleteAfter, instantDelete) {
