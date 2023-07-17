@@ -1,15 +1,11 @@
+const specialForums = require("./threadCreate/specialForums.js");
+
 module.exports = {
   name: "threadCreate",
-  //not checking for newlyCreated, incase bot misses a thread
-  execute(client, thread/*, newlyCreated?*/) {
-    const forum = client.specialForums.get(thread.parentId);
-    if (!forum) return;
-
-    /*
-    forum.defaultMessage(client, thread)
-    Should be a function returning a message or null
-    */
-    const defaultMessage = forum.defaultMessage?.(client, thread);
-    if (defaultMessage) thread.send(defaultMessage);
+  async execute(client, ...args) {
+    // wait 3 seconds, no idea why tho
+    setTimeout(() => {
+      specialForums.execute(client, ...args);
+    }, 3000);
   }
 }

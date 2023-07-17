@@ -2,6 +2,7 @@ const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const server = require("./src/utils/ServerUtil.js");
 const config = require("./src/values/config.js");
 const functions = require("./src/utils/GeneralUtil.js");
+const AIUtil = require("./src/utils/AIUtil.js");
 const db = require("./src/db/db.js");
 
 const client = new Client({
@@ -17,6 +18,7 @@ client.subcommands = new Collection();
 client.specialChannels = new Collection();
 client.specialForums = new Collection();
 client.f = functions;
+client.AIUtil = AIUtil;
 client.db = db;
 
 client.f.readEvents(client);
