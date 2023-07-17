@@ -2,6 +2,12 @@ module.exports.execute = async (client, thread/*, newlyCreated?*/) => {
   const forum = client.specialForums.get(thread.parentId);
   if (!forum) return;
 
+  thread.forum = forum;
+  thread.lock = async (reason) => {
+    await thread.setLocked(true, reason);
+    return await thread.setArchived(true, reason);
+  }
+
   /*
   starter message might arrive late in specific cases
   if that is the case, fetchStarterMessage will throw unknown message error
@@ -12,6 +18,7 @@ module.exports.execute = async (client, thread/*, newlyCreated?*/) => {
 
   TODO maybe delete thread if starterMessage failed?
   */
+  
   try {
     thread.starterMessage = await thread.fetchStarterMessage();
   } catch (_) {
@@ -25,17 +32,19 @@ module.exports.execute = async (client, thread/*, newlyCreated?*/) => {
   }
   if (!thread.starterMessage) return;
 
-  /*
-  forum.customTrigger(client, thread)
-  If this returns true, next rules won't be executed
-  */
-  const customTrigger = forum.customTrigger?.(client, thread);
-  if (customTrigger) return;
+  if (forum.execute?.length) {
+    for (const funcName of forum.execute) {
+      const func = forum[funcName];
+      if (!func) console.warn(`${thread.id} has no function ${funcName}!`);
+      const res = await func?.(client, thread);
+      if (res) return;
+    }
+  }
 
   /*
   forum.defaultMessage(client, thread)
-  Should be a function returning a message or null
+  Should be a function returning a message
   */
-  const defaultMessage = forum.defaultMessage?.(client, thread);
-  if (defaultMessage) thread.send(defaultMessage);
+  const defaultMessage = await forum.defaultMessage?.(client, thread);
+  if (defaultMessage) await thread.send(defaultMessage);
 }

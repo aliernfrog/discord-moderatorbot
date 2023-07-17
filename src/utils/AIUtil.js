@@ -1,3 +1,13 @@
+const multipleBugsTitleKeywords = [
+  "bugs",
+  "glitches"
+];
+const multipleThingsKeywords = [
+  "\n",
+  ",",
+  " and "
+];
+
 /*
 true if vague, false if not
 Returns {
@@ -16,6 +26,10 @@ module.exports.getBugReportVagueness = (message, title) => {
   }
 }
 
+module.exports.hasMultipleBugs = (message, title) => {
+  return hasMultipleThings(multipleBugsTitleKeywords, message, title);
+}
+
 /*
 Returns max 3
 */
@@ -27,4 +41,13 @@ function getBugReportTitleVagueness(title) {
   if (title.length < 10) vagueness++;
   if (words.length < 3) vagueness++;
   return vagueness;
+}
+
+function hasMultipleThings(titleKeywords, message, title) {
+  const content = (message.content ?? "").toLowerCase();
+  title = title.toLowerCase();
+  const titleWords = title.split(" ");
+  const titleMatches = titleWords.length < 5 && titleKeywords.some(k => titleWords.includes(k));
+  const contentMatches = multipleThingsKeywords.some(k => content.includes(k));
+  return titleMatches && contentMatches;
 }

@@ -1,10 +1,11 @@
 const { EmbedBuilder } = require("discord.js");
 
-const falsePositiveHint = "I'm a bot, downvote me if you think that this action is wrong.";
-
 module.exports = {
   //TODO use real id before merging
   id: "1130139025232117810",
+  execute: [
+    "violationChecks"
+  ],
   defaultMessage(_, thread) {
     const embed = new EmbedBuilder()
       .setTitle("ℹ️ Reminder")
@@ -18,55 +19,89 @@ module.exports = {
       });
     return { embeds: [embed] }
   },
-  customTrigger(client, thread) {
-
+  async violationChecks(client, thread) {
+    // Array of embed field objects
+    const warnings = [];
+    
+    /* Array of {
+      auditLogReason: "short reason to show in audit log",
+      embedField: embed field object
+    }*/
+    const lockReasons = [];
+    
     // Vagueness checks
     const vaguenessObj = client.AIUtil.getBugReportVagueness(thread.starterMessage, thread.name);
     const vaguenessValues = Object.values(vaguenessObj);
     const vagueness = vaguenessValues.filter(v => v === true);
     const isCompletelyVague = vagueness.length == vaguenessValues.length;
 
-    // Something is vague, start building the response
+    // Something is vague
     if (vagueness.length) {
-      const embed = new EmbedBuilder()
-        .setThumbnail(thread.guild.iconURL())
-        .setColor("Red")
-        .setFooter({ text: falsePositiveHint });
-      
       // Post is completely vague, it might be not even a report. Lock the post
-      if (isCompletelyVague) embed
-        .setTitle("🔒 Vague post")
-        .setFields({
-          name: "Your post is too vague.",
-          value: "Your post does not provide much details and it is hard to understand.\nThis post is now locked."
-        }, {
-          name: "What's next?",
-          value: "Your post may be unlocked or deleted after staff review.\nMeanwhile, you can create another post with proper details."
+      if (isCompletelyVague) {
+        lockReasons.push({
+          auditLogReason: "Vague post",
+          embedField: {
+            name: "❓ Your post is too vague.",
+            value: "Your post does not provide enough information."
+          }
         });
-      else {
+      } else {
         // Post most likely contains a bug report, but its still missing some details
-        embed.setTitle(
-          (vaguenessObj.description && vaguenessObj.title) ? "❓ Vague report" :
-          vaguenessObj.description ? "❓ Vague description" :
-          vaguenessObj.title ? "❓ Vague title" :
-          /*vaguenessObj.attachments ?*/ "👀 No screenshots or videos" /*:*/
-        )
-        if (vaguenessObj.description) embed.addFields({
-          name: "Your description is vague.",
+        if (vaguenessObj.description) warnings.push({
+          name: "❓ Your description is vague.",
           value: "Reports without a proper description might be hard for the developer to debug and fix."
         })
-        if (vaguenessObj.title) embed.addFields({
-          name: "Your title is vague.",
+        if (vaguenessObj.title) warnings.push({
+          name: "❓ Your title is vague.",
           value: "Report title must contain a short explanation of the bug. Otherwise it might go unnoticed and never be fixed."
         })
-        if (vaguenessObj.attachments) embed.addFields({
-          name: "Your post has no screenshots or videos.",
+        if (vaguenessObj.attachments) warnings.push({
+          name: "👀 Your post has no screenshots or videos.",
           value: "Screenshots and videos make it easier for the developer to understand and reproduce the bug."
         });
       }
-
-      // TODO close if completely vague
-      return thread.send({ embeds: [embed] });
     }
+
+    // All-in-one bug post checks
+    const hasMultiple = client.AIUtil.hasMultipleBugs(thread.starterMessage, thread.name);
+
+    // Post contains multiple bugs
+    if (hasMultiple) {
+      lockReasons.push({
+        auditLogReason: "Multiple bug reports in single post",
+        embedField: {
+          name: "💥 Your post has multiple bug reports.",
+          value: "Posting multiple bug reports in a single post will make those bugs harder to track.\nPlease open separate posts for each bug."
+        }
+      });
+    }
+
+
+    if (!warnings.length && !lockReasons.length) return; // Nothing to do, return false to execute next scripts
+
+    const isLocking = lockReasons.length > 0;
+    const embed = new EmbedBuilder()
+      .setTitle(
+        isLocking ? "🔒 Your post is now locked"
+        : "⚠️ Your post failed to meet the guidelines"
+      )
+      .setThumbnail(thread.guild.iconURL())
+      .setColor(isLocking ? "Red" : "Yellow")
+      .addFields(
+        isLocking ? lockReasons.map(r => r.embedField)
+        : warnings
+      );
+
+    if (isLocking) embed.setFooter({
+      text: "Your post may be unlocked or removed after staff review."
+    });
+
+    await thread.send({ embeds: [embed] });
+    if (isLocking) await thread.lock(
+      lockReasons.map(r => r.auditLogReason).join(", ")
+    );
+    
+    return true;
   }
 }
