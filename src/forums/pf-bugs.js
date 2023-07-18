@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
+const knownBugs = require("../ai/pf/knownBugs.js");
 
 module.exports = {
   //TODO use real id before merging
@@ -77,6 +78,25 @@ module.exports = {
       });
     }
 
+    // Known bugs checks
+    
+    // combine title and message content so we dont have to check for both
+    // filter(lowercaseContent, lowercaseArgs)
+    const content = `${thread.name}\n\n${thread.starterMessage.content?.toLowerCase?.() ?? ""}`;
+    const args = content.replace("\n"," ").replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(" "); // no newlines and punctuations
+    const knownBug = knownBugs.find(bug => {
+      return bug.filter(content, args);
+    });
+
+    if (knownBug) {
+      lockReasons.push({
+        auditLogReason: `Known bug: ${knownBug.name}`,
+        embedField: {
+          name: "💾 Your post is a duplicate.",
+          value: `This bug was already reported in [this thread](<${knownBug.thread}>).`
+        }
+      });
+    }
 
     if (!warnings.length && !lockReasons.length) return; // Nothing to do, return false to execute next scripts
 
