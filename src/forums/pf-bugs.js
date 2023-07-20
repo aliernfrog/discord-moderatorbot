@@ -64,6 +64,13 @@ module.exports = {
       }
     }
 
+    // Multiple tags checks
+    // Currently, only one tag is usually enough for a bug report
+    if (thread.appliedTags?.length > 1) warnings.push({
+      name: "🏷️ Your post has too many tags.",
+      value: "Having many tags on your post makes it harder to sort through other reports in the forum. Please edit your post and only pick **one** tag that best describes your issue."
+    });
+
     // All-in-one bug post checks
     const hasMultiple = client.AIUtil.hasMultipleBugs(thread.starterMessage, thread.name);
 
