@@ -49,9 +49,16 @@ module.exports = {
 
   readSpecialForums(client) {
     const files = fs.readdirSync("./src/forums").filter(file => file.endsWith(".js"));
+    const toInit = [];
     files.forEach(file => {
       const forum = require(`../forums/${file}`);
+      if (forum.init) toInit.push(forum.init);
       client.specialForums.set(forum.id, forum);
+    });
+    if (toInit.length) client.once("ready", async (cl) => {
+      for (const execute of toInit) {
+        await execute(cl);
+      }
     });
     console.log(`Loaded ${client.specialForums.size} special forums`);
   },

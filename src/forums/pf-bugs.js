@@ -52,11 +52,11 @@ module.exports = {
         if (vaguenessObj.description) warnings.push({
           name: "❓ Your description is vague.",
           value: "Reports without a proper description might be hard for the developer to debug and fix."
-        })
+        });
         if (vaguenessObj.title) warnings.push({
           name: "❓ Your title is vague.",
-          value: "Report title must contain a short explanation of the bug. Otherwise it might go unnoticed and never be fixed."
-        })
+          value: "Post title must contain a short explanation of the bug. Otherwise it might go unnoticed and never be fixed."
+        });
         if (vaguenessObj.attachments) warnings.push({
           name: "👀 Your post has no screenshots or videos.",
           value: "Screenshots and videos make it easier for the developer to understand and reproduce the bug."
