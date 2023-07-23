@@ -1,5 +1,12 @@
 module.exports = [
   {
+    name: "SSL CA certificate error",
+    thread: "https://discord.com/channels/752538330528481351/1032276983331180648/1032276983331180648",
+    filter(_, args) {
+      return args.includes("ssl") && args.includes("certificate");
+    }
+  },
+  {
     name: "Pink guns",
     thread: "https://discord.com/channels/752538330528481351/1103054479839998072/1103054479839998072",
     filter(_, args) {
@@ -20,7 +27,8 @@ module.exports = [
     filter(_, args) {
       const c1 = ["hold","holding","hand"].some(w => args.includes(w));
       const c2 = ["gun","guns","weapon","weapons"].some(w => args.includes(w));
-      return c1 && c2;
+      const c3 = ["multiple","two","three"].some(w => args.includes(w));
+      return c1 && c2 && c3;
     }
   }
 ];

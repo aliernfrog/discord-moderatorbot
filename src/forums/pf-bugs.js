@@ -89,7 +89,7 @@ module.exports = {
     
     // combine title and message content so we dont have to check for both
     // filter(lowercaseContent, lowercaseArgs)
-    const content = `${thread.name}\n\n${thread.starterMessage.content?.toLowerCase?.() ?? ""}`;
+    const content = `${thread.name} ${thread.starterMessage.content?.toLowerCase?.() ?? ""}`;
     const args = content.replace("\n"," ").replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").split(" "); // no newlines and punctuations
     const knownBug = knownBugs.find(bug => {
       return bug.filter(content, args);
