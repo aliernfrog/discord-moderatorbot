@@ -125,9 +125,23 @@ module.exports = {
     });
 
     await thread.send({ embeds: [embed] });
-    if (isLocking) await thread.lock(
-      lockReasons.map(r => r.auditLogReason).join(", ")
-    );
+    
+    if (isLocking) {
+      const logReason = lockReasons.map(r => r.auditLogReason).join(", ");
+      
+      await thread.lock(logReason);
+
+      const logEmbed = new EmbedBuilder()
+        .setTitle(`**🔒 Bug report locked:** ${thread.name}`)
+        .setColor("Red")
+        .setDescription(logReason)
+        .setFooter({
+          text: `Created by ${thread.starterMessage.author.username}`,
+          iconURL: thread.starterMessage.author.avatarURL()
+        });
+      
+      await client.ModLogUtil.log(client, thread.guild.id, logEmbed, true, thread.starterMessage);
+    }
     
     return true;
   }

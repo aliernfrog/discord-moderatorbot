@@ -38,6 +38,18 @@ module.exports = {
     console.log(`Loaded ${client.subcommands.size} subcommands`);
   },
 
+  readMessageComponents(client) {
+    const folders = fs.readdirSync("./src/interactions/messageComponents");
+    folders.forEach(folder => {
+      const files = fs.readdirSync(`./src/interactions/messageComponents/${folder}`).filter(file => file.endsWith(".js"));
+      files.forEach(file => {
+        const component = require(`../interactions/messageComponents/${folder}/${file}`);
+        client.messageComponents.set(component.name, component);
+      });
+    });
+    console.log(`Loaded ${client.messageComponents.size} message components`);
+  },
+
   readSpecialChannels(client) {
     const files = fs.readdirSync("./src/channels").filter(file => file.endsWith(".js"));
     files.forEach(file => {
@@ -98,6 +110,10 @@ module.exports = {
     const split = str.split(".");
     split.pop();
     return split.join(".");
+  },
+
+  buildMessageURL(message) {
+    return `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`
   },
 
   async generateLeaderboard(client, guildId) {
