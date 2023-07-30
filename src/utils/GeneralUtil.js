@@ -71,7 +71,9 @@ module.exports = {
       for (const execute of toInit) {
         try {
           await execute(cl);
-        } catch (_) {}
+        } catch (e) {
+          console.error(e);
+        }
       }
     });
     console.log(`Loaded ${client.specialForums.size} special forums`);
