@@ -8,6 +8,8 @@ module.exports = {
     "violationChecks"
   ],
   defaultMessage(_, thread) {
+    if (thread.starterMessage.author.moderator) return;
+    
     const embed = new EmbedBuilder()
       .setTitle("ℹ️ Reminder")
       .setThumbnail(thread.guild.iconURL())
@@ -21,6 +23,8 @@ module.exports = {
     return { embeds: [embed] }
   },
   async violationChecks(client, thread) {
+    if (thread.starterMessage.author.moderator) return;
+    
     // Array of embed field objects
     const warnings = [];
     

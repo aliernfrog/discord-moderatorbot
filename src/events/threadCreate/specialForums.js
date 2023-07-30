@@ -1,3 +1,5 @@
+const { PermissionFlagsBits } = require("discord.js");
+
 module.exports.execute = async (client, thread/*, newlyCreated?*/) => {
   const forum = client.specialForums.get(thread.parentId);
   if (!forum) return;
@@ -31,6 +33,12 @@ module.exports.execute = async (client, thread/*, newlyCreated?*/) => {
       .catch(() => { /*message did not arrive in time*/ })?.first?.();
   }
   if (!thread.starterMessage) return;
+
+  try {
+    thread.starterMessage.author.moderator = thread.permissionsFor(thread.starterMessage.author).has(PermissionFlagsBits.ManageThreads);
+  } catch (_) {
+    thread.starterMessage.author.moderator = false;
+  }
 
   if (forum.execute?.length) {
     for (const funcName of forum.execute) {
