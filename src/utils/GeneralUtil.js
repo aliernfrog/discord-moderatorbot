@@ -38,14 +38,45 @@ module.exports = {
     console.log(`Loaded ${client.subcommands.size} subcommands`);
   },
 
+  readMessageComponents(client) {
+    const folders = fs.readdirSync("./src/interactions/messageComponents");
+    folders.forEach(folder => {
+      const files = fs.readdirSync(`./src/interactions/messageComponents/${folder}`).filter(file => file.endsWith(".js"));
+      files.forEach(file => {
+        const component = require(`../interactions/messageComponents/${folder}/${file}`);
+        client.messageComponents.set(component.name, component);
+      });
+    });
+    console.log(`Loaded ${client.messageComponents.size} message components`);
+  },
+
   readSpecialChannels(client) {
     const files = fs.readdirSync("./src/channels").filter(file => file.endsWith(".js"));
     files.forEach(file => {
       const channel = require(`../channels/${file}`);
-      const fileName = file.replace(".js","");
       client.specialChannels.set(channel.id, channel);
     });
     console.log(`Loaded ${client.specialChannels.size} special channels`);
+  },
+
+  readSpecialForums(client) {
+    const files = fs.readdirSync("./src/forums").filter(file => file.endsWith(".js"));
+    const toInit = [];
+    files.forEach(file => {
+      const forum = require(`../forums/${file}`);
+      if (forum.init) toInit.push(forum.init);
+      client.specialForums.set(forum.id, forum);
+    });
+    if (toInit.length) client.once("ready", async (cl) => {
+      for (const execute of toInit) {
+        try {
+          await execute(cl);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
+    console.log(`Loaded ${client.specialForums.size} special forums`);
   },
 
   async inform(message, options, deleteAfter, instantDelete) {
@@ -83,6 +114,10 @@ module.exports = {
     const split = str.split(".");
     split.pop();
     return split.join(".");
+  },
+
+  buildMessageURL(message) {
+    return `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`
   },
 
   async generateLeaderboard(client, guildId) {
