@@ -3,7 +3,7 @@ const { EmbedBuilder } = require("discord.js");
 let tagTypes = {};
 
 module.exports = {
-  id: "1019650643696296047",
+  id: "1131675909288624309",
   execute: [
     "violationChecks"
   ],

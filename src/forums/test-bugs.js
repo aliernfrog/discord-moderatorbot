@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const knownBugs = require("../ai/pf/knownBugs.js");
 
 module.exports = {
-  id: "1019651230697521192",
+  id: "1130139025232117810",
   execute: [
     "violationChecks"
   ],
