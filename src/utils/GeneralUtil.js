@@ -69,7 +69,9 @@ module.exports = {
     });
     if (toInit.length) client.once("ready", async (cl) => {
       for (const execute of toInit) {
-        await execute(cl);
+        try {
+          await execute(cl);
+        } catch (_) {}
       }
     });
     console.log(`Loaded ${client.specialForums.size} special forums`);
