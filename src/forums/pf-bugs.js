@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 const { EmbedBuilder } = require("discord.js");
 const knownBugs = require("../ai/pf/knownBugs.js");
 
