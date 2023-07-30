@@ -7,7 +7,6 @@ module.exports = {
     const files = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
     files.forEach(file => {
       const event = require(`../events/${file}`);
-      const fileName = file.replace(".js","");
       if (event.once) client.once(event.name, (...args) => event.execute(client, ...args));
       else client.on(event.name, (...args) => event.execute(client, ...args));
     });
@@ -125,7 +124,7 @@ module.exports = {
     const maps = data.maps || [];
     const starred = [];
     const leaders = [];
-    for (i = 0; i < maps.length; i++) {
+    for (let i = 0; i < maps.length; i++) {
       try {
         const map = maps[i];
         const channel = await client.channels.fetch(map.channelId);
@@ -137,7 +136,7 @@ module.exports = {
         map.link = `https://discord.com/channels/${guildId}/${map.channelId}/${map.messageId}`;
         if (stars > 0) starred.push(map);
         else if (map.totalVotes > 0) leaders.push(map);
-      } catch (e) {}
+      } catch (_) { /**/ }
     }
     const embed = new EmbedBuilder().setTitle("🏆 Map leaderboard").setColor("Random");
     const fields = [];

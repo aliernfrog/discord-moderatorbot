@@ -1,6 +1,4 @@
-const fs = require("fs");
 const http = require("http");
-const validTypes = [];
 let shouldBeReady = false;
 
 function start(client) {
