@@ -7,7 +7,6 @@ module.exports = {
     const files = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
     files.forEach(file => {
       const event = require(`../events/${file}`);
-      const fileName = file.replace(".js","");
       if (event.once) client.once(event.name, (...args) => event.execute(client, ...args));
       else client.on(event.name, (...args) => event.execute(client, ...args));
     });
@@ -38,14 +37,45 @@ module.exports = {
     console.log(`Loaded ${client.subcommands.size} subcommands`);
   },
 
+  readMessageComponents(client) {
+    const folders = fs.readdirSync("./src/interactions/messageComponents");
+    folders.forEach(folder => {
+      const files = fs.readdirSync(`./src/interactions/messageComponents/${folder}`).filter(file => file.endsWith(".js"));
+      files.forEach(file => {
+        const component = require(`../interactions/messageComponents/${folder}/${file}`);
+        client.messageComponents.set(component.name, component);
+      });
+    });
+    console.log(`Loaded ${client.messageComponents.size} message components`);
+  },
+
   readSpecialChannels(client) {
     const files = fs.readdirSync("./src/channels").filter(file => file.endsWith(".js"));
     files.forEach(file => {
       const channel = require(`../channels/${file}`);
-      const fileName = file.replace(".js","");
       client.specialChannels.set(channel.id, channel);
     });
     console.log(`Loaded ${client.specialChannels.size} special channels`);
+  },
+
+  readSpecialForums(client) {
+    const files = fs.readdirSync("./src/forums").filter(file => file.endsWith(".js"));
+    const toInit = [];
+    files.forEach(file => {
+      const forum = require(`../forums/${file}`);
+      if (forum.init) toInit.push(forum.init);
+      client.specialForums.set(forum.id, forum);
+    });
+    if (toInit.length) client.once("ready", async (cl) => {
+      for (const execute of toInit) {
+        try {
+          await execute(cl);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    });
+    console.log(`Loaded ${client.specialForums.size} special forums`);
   },
 
   async inform(message, options, deleteAfter, instantDelete) {
@@ -85,12 +115,16 @@ module.exports = {
     return split.join(".");
   },
 
+  buildMessageURL(message) {
+    return `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`
+  },
+
   async generateLeaderboard(client, guildId) {
     const data = await client.db.guildData(guildId);
     const maps = data.maps || [];
     const starred = [];
     const leaders = [];
-    for (i = 0; i < maps.length; i++) {
+    for (let i = 0; i < maps.length; i++) {
       try {
         const map = maps[i];
         const channel = await client.channels.fetch(map.channelId);
@@ -102,7 +136,7 @@ module.exports = {
         map.link = `https://discord.com/channels/${guildId}/${map.channelId}/${map.messageId}`;
         if (stars > 0) starred.push(map);
         else if (map.totalVotes > 0) leaders.push(map);
-      } catch (e) {}
+      } catch (_) { /**/ }
     }
     const embed = new EmbedBuilder().setTitle("🏆 Map leaderboard").setColor("Random");
     const fields = [];

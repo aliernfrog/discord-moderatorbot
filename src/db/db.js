@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const config = require("../values/config.js");
 mongoose.set("strictQuery", true);
 
 const Guild = require("./schemas/Guild.js");
@@ -41,7 +40,7 @@ async function userData(id) {
   });
 }
 
-async function getUserCooldown(id, channel, returnIndex) {
+async function getUserCooldown(id, channel) {
   const data = await userData(id);
   return data.cooldowns.find(c => c.channel === channel) || {channel: channel};
 }
@@ -51,14 +50,14 @@ async function setUserCooldown(id, options) {
   const cooldowns = data.cooldowns || [];
   const index = findCooldownIndex(cooldowns, options.channel);
   if (index === cooldowns.length) cooldowns.push(options);
-  else cooldowns[i] = options;
+  else cooldowns[index] = options;
   data.cooldowns = cooldowns;
   data.save();
 }
 
 function findCooldownIndex(array, channel) {
   let index = array.length;
-  for (i = 0; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     if (array[i].channel === channel) {
       index = i;
       break;
