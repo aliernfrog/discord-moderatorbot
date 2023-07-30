@@ -8,7 +8,6 @@
 */
 
 module.exports = {
-  // TODO add real config
   
   // testing server
   "834886482300764180": {
