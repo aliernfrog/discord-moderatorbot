@@ -119,11 +119,11 @@ module.exports = {
       .addFields(
         isLocking ? lockReasons.map(r => r.embedField)
         : warnings
-      );
-
-    if (isLocking) embed.setFooter({
-      text: "Your post may be unlocked or removed after staff review."
-    });
+      )
+      .setFooter({
+        text: isLocking ? "Your post may be unlocked or removed after staff review."
+          : "You can edit your post to solve these issues."
+      });
 
     await thread.send({ embeds: [embed] });
     
