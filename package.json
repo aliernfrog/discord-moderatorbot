@@ -8,11 +8,11 @@
   },
   "dependencies": {
     "discord.js": "^14.11.0",
-    "mongoose": "^7.3.3",
-    "node": "^20.3.1",
+    "mongoose": "^7.4.1",
+    "node": "^20.5.0",
     "node-fetch": "^2.6.12"
   },
   "devDependencies": {
-    "eslint": "^8.45.0"
+    "eslint": "^8.46.0"
   }
 }
