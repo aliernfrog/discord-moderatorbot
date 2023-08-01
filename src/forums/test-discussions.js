@@ -19,7 +19,7 @@ module.exports = {
     }
   },
   defaultMessage(_, thread) {
-    if (thread.starterMessage.author.moderator) return;
+    //if (thread.starterMessage.author.moderator) return;
     
     const embed = new EmbedBuilder()
       .setTitle("ℹ️ Reminder")
@@ -34,7 +34,7 @@ module.exports = {
     return { embeds: [embed] }
   },
   async violationChecks(client, thread) {
-    if (thread.starterMessage.author.moderator) return;
+    //if (thread.starterMessage.author.moderator) return;
     
     // Array of embed field objects
     const warnings = [];
