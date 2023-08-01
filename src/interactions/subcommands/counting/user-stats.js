@@ -11,7 +11,7 @@ module.exports = {
     //TODO show milestones the user has reached
     //TODO improve this
     const embed = new EmbedBuilder()
-      .setTitle(user.tag)
+      .setTitle(user.displayName)
       .setThumbnail(user.avatarURL())
       .setColor("Random")
       .setDescription(`Participated in counting **${counts}** times`);
