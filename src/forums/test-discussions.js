@@ -56,8 +56,10 @@ module.exports = {
       const vaguenessObj = client.AIUtil.getSuggestionVagueness(thread.starterMessage, thread.name);
       const vaguenessValues = Object.values(vaguenessObj);
       const vagueness = vaguenessValues.filter(v => v === true);
+      // For feature request posts, title and description must not be vague
       // For feedback posts, title and screenshots aren't important, description must not be vague
-      const isCompletelyVague = (postType == "feedback") ? vaguenessObj.description : vagueness.length == vaguenessValues.length;
+      const isCompletelyVague = (postType == "feedback") ? vaguenessObj.description
+        : vaguenessObj.title && vaguenessObj.description;
       
       // Vagueness checks
       if (isCompletelyVague) {
