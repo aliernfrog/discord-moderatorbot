@@ -46,11 +46,11 @@ module.exports = {
     const lockReasons = [];
 
     // Post type checks
-    // may be null, "featureRequest" or "feedback"
-    const postType = thread.appliedTags?.length > 1 ? null : Object.keys(tagTypes).find(key => {
-      const tagId = tagTypes[key];
-      return thread.appliedTags?.includes?.(tagId);
-    });
+    // can be null (unknown), "featureRequest" or "feedback"
+    thread.appliedTags ??= [];
+    const postType = thread.appliedTags.includes(tagTypes.featureRequest) ? "featureRequest"
+      : thread.appliedTags.includes(tagTypes.feedback) ? "feedback"
+      : null;
 
     if (postType == "featureRequest" || postType == "feedback") {
       const vaguenessObj = client.AIUtil.getSuggestionVagueness(thread.starterMessage, thread.name);
