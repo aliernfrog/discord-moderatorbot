@@ -20,6 +20,7 @@ client.subcommands = new Collection();
 client.messageComponents = new Collection();
 client.specialChannels = new Collection();
 client.specialForums = new Collection();
+client.navigatorChannels = new Collection();
 
 client.config = config;
 client.guildConfig = guildConfig;
@@ -34,6 +35,7 @@ client.f.readSubcommands(client);
 client.f.readMessageComponents(client);
 client.f.readSpecialChannels(client);
 client.f.readSpecialForums(client);
+client.f.readNavigatorChannels(client);
 
 server.start(client);
 client.db.connect();

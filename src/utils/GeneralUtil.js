@@ -78,6 +78,15 @@ module.exports = {
     console.log(`Loaded ${client.specialForums.size} special forums`);
   },
 
+  readNavigatorChannels(client) {
+    const files = fs.readdirSync("./src/navigatorChannels").filter(file => file.endsWith(".js"));
+    files.forEach(file => {
+      const channel = require(`../navigatorChannels/${file}`);
+      client.navigatorChannels.set(channel.id, channel);
+    });
+    console.log(`Loaded ${client.navigatorChannels.size} navigator channels`);
+  },
+
   async inform(message, options, deleteAfter, instantDelete) {
     if (message.system) return message.delete();
     if (options.content) options.content = `${message.author}, ${options.content || ""}`;
@@ -117,6 +126,10 @@ module.exports = {
 
   buildMessageURL(message) {
     return `https://discord.com/channels/${message.guild.id}/${message.channel.id}/${message.id}`
+  },
+
+  buildChannelURL(channel) {
+    return `https://discord.com/channels/${channel.guild.id}/${channel.id}`;
   },
 
   async generateLeaderboard(client, guildId) {
