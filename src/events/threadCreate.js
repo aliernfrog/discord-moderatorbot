@@ -1,4 +1,5 @@
 const specialForums = require("./threadCreate/specialForums.js");
+const navigatorChannels = require("./threadCreate/navigatorChannels.js");
 
 module.exports = {
   name: "threadCreate",
@@ -7,5 +8,7 @@ module.exports = {
     setTimeout(() => {
       specialForums.execute(client, ...args);
     }, 500);
+
+    navigatorChannels(client, ...args);
   }
 }
