@@ -1,0 +1,22 @@
+/* no longer used
+module.exports = {
+  id: "893595541156548659",
+  messageId: "1137422771912183942",
+  async generateMessage(client, channel) {
+    const threads = (await channel.threads.fetch()).threads
+      .reverse(); // Reverse to make oldest show at top. TODO some kind of sorting system
+    
+    const content = [
+      "# ❓ Frequently Asked Questions",
+      "Click a question below to see its answer.",
+      "",
+      threads.filter(t => t.name.endsWith("?"))
+        .map(thread => {
+          const link = client.f.buildChannelURL(thread);
+          return `### - [${thread.name}](${link})`;
+        }).join("\n\n")
+    ].join("\n");
+
+    return content;
+  }
+}*/
