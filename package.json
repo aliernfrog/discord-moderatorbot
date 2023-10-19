@@ -7,12 +7,12 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "discord.js": "^14.12.1",
-    "mongoose": "^7.5.0",
-    "node": "^20.5.0",
-    "node-fetch": "^2.6.12"
+    "discord.js": "^14.13.0",
+    "mongoose": "^7.6.3",
+    "node": "^21.0.0",
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
-    "eslint": "^8.46.0"
+    "eslint": "^8.51.0"
   }
 }

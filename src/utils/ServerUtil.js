@@ -12,6 +12,9 @@ function start(client) {
     shouldBeReady = true;
     if (!client.isReady()) process.kill(1);
   }, 10000);
+  setInterval(() => {
+    fetch(process.env.SELF_URL)
+  }, 300000);
 }
 
 function listen(req, res, client) {
