@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { Client, Collection, GatewayIntentBits } = require("discord.js");
 const server = require("./src/utils/ServerUtil.js");
 const config = require("./src/values/config.js");
