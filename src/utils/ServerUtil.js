@@ -1,13 +1,15 @@
 const http = require("http");
 let shouldBeReady = false;
 
+const port = process.env.PORT;
+
 function start(client) {
-  if (process.env.SERVER_ENABLED != "true") return;
+  if (!port) return console.warn("Port not specified, not starting server");
   const server = http.createServer(function(req,res) {
     listen(req, res, client);
   });
-  server.listen(5000, () => {
-    console.log("Server running!");
+  server.listen(port, () => {
+    console.log(`Server running on: ${port}`);
   });
   setTimeout(() => {
     shouldBeReady = true;
