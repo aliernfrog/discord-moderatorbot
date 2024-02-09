@@ -11,7 +11,7 @@ module.exports = {
     managerEval.execute(client, message);
 
     if (message.guild?.id == "752538330528481351") {
-      const trigger1 = ["polyfield", "poly"];
+      const trigger1 = ["polyfield", "poly", "game"];
       const trigger2 = ["googleplay", "google play", "playstore", "play store", "market", "store", "gone", "download"];
       const content = (message.content ?? "").toLowerCase().replace("  ", " ");
       if (trigger1.some(t => content.includes(t)) && trigger2.some(t => content.includes(t))) {
