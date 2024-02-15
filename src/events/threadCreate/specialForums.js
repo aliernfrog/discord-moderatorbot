@@ -1,6 +1,6 @@
-const { PermissionFlagsBits } = require("discord.js");
+import { PermissionFlagsBits } from "discord.js";
 
-module.exports.execute = async (client, thread/*, newlyCreated?*/) => {
+export default async function execute(client, thread/*, newlyCreated?*/) {
   const forum = client.specialForums.get(thread.parentId);
   if (!forum) return;
 

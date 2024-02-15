@@ -1,20 +1,18 @@
-const { InteractionType } = require("discord.js");
+import { InteractionType } from "discord.js";
 
-const command = require("./interactionCreate/command.js");
-const messageComponent = require("./interactionCreate/messageComponent.js");
+import handleCommand from "./interactionCreate/command.js";
+import handleMessageComponent from "./interactionCreate/messageComponent.js";
 
-module.exports = {
+export default {
   name: "interactionCreate",
   execute(client, interaction) {
-    
     switch (interaction.type) {
       case InteractionType.ApplicationCommand:
-        command.execute(client, interaction);
+        handleCommand(client, interaction);
         break;
       case InteractionType.MessageComponent:
-        messageComponent.execute(client, interaction);
+        handleMessageComponent.execute(client, interaction);
         break;
     }
-    
   }
 }

@@ -1,7 +1,7 @@
 const mapExtensions = [".zip"];
 const imageExtensions = [".png",".webp",".jpg",".jpeg",".gif"];
 
-module.exports = {
+export default {
   id: "968935634838372502",
   async execute(client, message) {
     const attachments = [...message.attachments.values()] || [];

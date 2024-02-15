@@ -1,6 +1,6 @@
-const { EmbedBuilder } = require("discord.js");
+import { EmbedBuilder } from "discord.js";
 
-module.exports = {
+export default {
   name: "milestones",
   async execute(client, interaction) {
     const data = await client.db.guildData(interaction.guild.id);

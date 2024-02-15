@@ -1,6 +1,6 @@
-const { MessageType } = require("discord.js");
+import { MessageType } from "discord.js";
 
-module.exports = (client, message) => {
+export default function execute(client, message) {
   const channel = client.navigatorChannels.get(message.channel.id);
   if (!channel) return;
 

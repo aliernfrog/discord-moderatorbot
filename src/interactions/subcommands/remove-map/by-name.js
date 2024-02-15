@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   name: "by-name",
   async execute(client, interaction) {
     const name = interaction.options.getString("name");

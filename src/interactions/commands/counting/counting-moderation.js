@@ -1,6 +1,6 @@
-const { ApplicationCommandOptionType, PermissionFlagsBits } = require("discord.js");
+import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
 
-module.exports = {
+export default {
   data: {
     name: "counting-moderation",
     description: "Moderates counting in current server.",

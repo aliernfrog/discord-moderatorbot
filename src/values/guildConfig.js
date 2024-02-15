@@ -7,7 +7,7 @@
 }
 */
 
-module.exports = {
+export default {
   
   // testing server
   "834886482300764180": {

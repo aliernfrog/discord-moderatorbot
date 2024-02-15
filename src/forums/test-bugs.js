@@ -1,9 +1,9 @@
 /* eslint-disable no-useless-escape */
 
-const { EmbedBuilder } = require("discord.js");
-const knownBugs = require("../ai/pf/knownBugs.js");
+import { EmbedBuilder } from "discord.js";
+import knownBugs from "../ai/pf/knownBugs.js";
 
-module.exports = {
+export default {
   id: "1130139025232117810",
   execute: [
     "violationChecks"

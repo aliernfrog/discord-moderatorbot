@@ -1,6 +1,6 @@
-const { PermissionFlagsBits } = require("discord.js");
+import { PermissionFlagsBits } from "discord.js";
 
-module.exports = {
+export default {
   data: {
     name: "emit-thread",
     description: "Emits create event for current thread.",

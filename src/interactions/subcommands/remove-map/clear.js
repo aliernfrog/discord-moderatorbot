@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   name: "clear",
   async execute(client, interaction) {
     const confirm = interaction.options.getBoolean("confirm");

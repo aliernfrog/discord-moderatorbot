@@ -1,5 +1,5 @@
 /* no longer used
-module.exports = {
+export default {
   id: "893595541156548659",
   messageId: "1137422771912183942",
   async generateMessage(client, channel) {

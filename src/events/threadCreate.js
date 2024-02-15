@@ -1,14 +1,14 @@
-const specialForums = require("./threadCreate/specialForums.js");
-const navigatorChannels = require("./threadCreate/navigatorChannels.js");
+import handleSpecialForum from "./threadCreate/specialForums.js";
+import handleNavigatorChannel from "./threadCreate/navigatorChannels.js";
 
-module.exports = {
+export default {
   name: "threadCreate",
   async execute(client, ...args) {
     // wait half a second, no idea why tho
     setTimeout(() => {
-      specialForums.execute(client, ...args);
+      handleSpecialForum(client, ...args);
     }, 500);
 
-    navigatorChannels(client, ...args);
+    handleNavigatorChannel(client, ...args);
   }
 }

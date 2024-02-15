@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   name: "by-author",
   async execute(client, interaction) {
     const id = interaction.options.getString("id");

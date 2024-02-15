@@ -1,6 +1,6 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle } from "discord.js";
 
-module.exports.log = async (client, guildId, embeds, needsReview, contextMessage) => {
+export async function log(client, guildId, embeds, needsReview, contextMessage) {
   const guildConfig = client.guildConfig[guildId];
   if (!guildConfig?.logChannel) return console.warn(`${guildId} doesn't have a logChannel!`);
 

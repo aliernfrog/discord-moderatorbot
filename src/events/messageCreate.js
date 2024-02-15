@@ -1,14 +1,14 @@
-const { EmbedBuilder } = require("discord.js");
-const specialChannels = require("./messageCreate/specialChannels.js");
-const navigatorChannels = require("./messageCreate/navigatorChannels.js");
-const managerEval = require("./messageCreate/managerEval.js");
+import { EmbedBuilder } from "discord.js";
+import handleSpecialChannel from "./messageCreate/specialChannels.js";
+import handleNavigatorChannel from "./messageCreate/navigatorChannels.js";
+import handleManagerEval from "./messageCreate/managerEval.js";
 
-module.exports = {
+export default {
   name: "messageCreate",
   execute(client, message) {
-    specialChannels.execute(client, message);
+    handleSpecialChannel(client, message);
     navigatorChannels(client, message);
-    managerEval.execute(client, message);
+    handleManagerEval(client, message);
 
     if (message.guild?.id == "752538330528481351") {
       const trigger1 = ["polyfield", "poly", "game"];

@@ -1,13 +1,13 @@
-require('dotenv').config();
+import "dotenv/config";
 
-const { Client, Collection, GatewayIntentBits } = require("discord.js");
-const server = require("./src/utils/ServerUtil.js");
-const config = require("./src/values/config.js");
-const guildConfig = require("./src/values/guildConfig.js");
-const functions = require("./src/utils/GeneralUtil.js");
-const AIUtil = require("./src/utils/AIUtil.js");
-const ModLogUtil = require("./src/utils/ModLogUtil.js");
-const db = require("./src/db/db.js");
+import { Client, Collection, GatewayIntentBits } from "discord.js";
+import { start as startServer } from "./src/utils/ServerUtil.js";
+import config from "./src/values/config.js";
+import guildConfig from "./src/values/guildConfig.js";
+import functions from "./src/utils/GeneralUtil.js";
+import * as AIUtil from "./src/utils/AIUtil.js";
+import * as ModLogUtil from "./src/utils/ModLogUtil.js";
+import * as db from "./src/db/db.js";
 
 const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
@@ -31,14 +31,16 @@ client.ModLogUtil = ModLogUtil;
 client.AIUtil = AIUtil;
 client.db = db;
 
-client.f.readEvents(client);
-client.f.readCommands(client);
-client.f.readSubcommands(client);
-client.f.readMessageComponents(client);
-client.f.readSpecialChannels(client);
-client.f.readSpecialForums(client);
-client.f.readNavigatorChannels(client);
+(async () => {
+  await client.f.readEvents(client);
+  await client.f.readCommands(client);
+  await client.f.readSubcommands(client);
+  await client.f.readMessageComponents(client);
+  await client.f.readSpecialChannels(client);
+  await client.f.readSpecialForums(client);
+  await client.f.readNavigatorChannels(client);
+})();
 
-server.start(client);
+startServer(client);
 client.db.connect();
 client.login(config.token);

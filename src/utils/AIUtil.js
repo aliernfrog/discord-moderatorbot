@@ -24,7 +24,7 @@ Returns {
   title: true
 }
 */
-module.exports.getBugReportVagueness = (message, title) => {
+export function getBugReportVagueness(message, title) {
   const content = (message.content ?? "").toLowerCase();
   const words = content.split(" ");
   return {
@@ -35,7 +35,7 @@ module.exports.getBugReportVagueness = (message, title) => {
 }
 
 // Same as getBugReportVagueness
-module.exports.getSuggestionVagueness = (message, title) => {
+export function getSuggestionVagueness(message, title) {
   const content = (message.content ?? "").toLowerCase();
   const words = content.split(" ");
   return {
@@ -52,11 +52,11 @@ module.exports.getSuggestionVagueness = (message, title) => {
   }
 }
 
-module.exports.hasMultipleBugs = (message, title) => {
+export function hasMultipleBugs(message, title) {
   return hasMultipleThings(multipleBugsTitleKeywords, message, title);
 }
 
-module.exports.hasMultipleFeatureRequests = (message, title) => {
+export function hasMultipleFeatureRequests(message, title) {
   return hasMultipleThings(multipleFeatureRequestsTitleKeywords, message, title);
 }
 

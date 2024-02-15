@@ -1,6 +1,6 @@
-const { AttachmentBuilder, MessageFlags } = require("discord.js");
+import { AttachmentBuilder, MessageFlags } from "discord.js";
 
-module.exports = {
+export default {
   id: "1003647447135965216",
   execute(client, message) {
     if (!message.flags.has(MessageFlags.IsCrosspost)) return;

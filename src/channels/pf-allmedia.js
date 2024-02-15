@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   id: "906253653759885322",
   mediaOnly: true,
   disableReplies: true,

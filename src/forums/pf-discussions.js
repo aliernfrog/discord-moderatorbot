@@ -1,14 +1,14 @@
-const { EmbedBuilder } = require("discord.js");
+import { EmbedBuilder } from "discord.js";
 
 let tagTypes = {};
 
-module.exports = {
+const module = {
   id: "1019650643696296047",
   execute: [
     "violationChecks"
   ],
   async init(client) {
-    const forum = await client.channels.fetch(module.exports.id);
+    const forum = await client.channels.fetch(module.id);
     const findByName = (name) =>
       forum.availableTags?.find?.(
         tag => tag.name.toLowerCase().includes(name)
@@ -151,3 +151,5 @@ module.exports = {
     return true;
   }
 }
+
+export default module;

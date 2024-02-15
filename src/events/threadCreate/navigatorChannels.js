@@ -1,4 +1,4 @@
-module.exports = async (client, thread) => {
+export default async function execute(client, thread) {
   const channel = client.navigatorChannels.get(thread.parentId);
   if (!channel) return;
 

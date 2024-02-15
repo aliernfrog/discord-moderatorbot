@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   name: "set-last-count",
   async execute(client, interaction) {
     const lastCount = interaction.options.getInteger("last-count");

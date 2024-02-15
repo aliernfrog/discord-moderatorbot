@@ -1,71 +1,71 @@
-const { EmbedBuilder } = require("discord.js");
-const fs = require("fs");
-const config = require("../values/config.js");
+import { EmbedBuilder } from "discord.js";
+import { readdirSync } from "fs";
+import config from "../values/config.js";
 
-module.exports = {
-  readEvents(client) {
-    const files = fs.readdirSync("./src/events").filter(file => file.endsWith(".js"));
-    files.forEach(file => {
-      const event = require(`../events/${file}`);
+export default {
+  async readEvents(client) {
+    const files = readdirSync("./src/events").filter(file => file.endsWith(".js"));
+    for (const file of files) {
+      const event = (await import(`../events/${file}`)).default;
       if (event.once) client.once(event.name, (...args) => event.execute(client, ...args));
       else client.on(event.name, (...args) => event.execute(client, ...args));
-    });
+    }
     console.log(`Loaded ${files.length} events`);
   },
 
-  readCommands(client) {
-    const folders = fs.readdirSync("./src/interactions/commands");
-    folders.forEach(folder => {
-      const files = fs.readdirSync(`./src/interactions/commands/${folder}`).filter(file => file.endsWith(".js"));
-      files.forEach(file => {
-        const command = require(`../interactions/commands/${folder}/${file}`);
+  async readCommands(client) {
+    const folders = readdirSync("./src/interactions/commands");
+    for (const folder of folders) {
+      const files = readdirSync(`./src/interactions/commands/${folder}`).filter(file => file.endsWith(".js"));
+      for (const file of files) {
+        const command = (await import(`../interactions/commands/${folder}/${file}`)).default;
         client.commands.set(command.data.name, command);
-      });
-    });
+      }
+    }
     console.log(`Loaded ${client.commands.size} commands`);
   },
 
-  readSubcommands(client) {
-    const folders = fs.readdirSync("./src/interactions/subcommands");
-    folders.forEach(folder => {
-      const files = fs.readdirSync(`./src/interactions/subcommands/${folder}`).filter(file => file.endsWith(".js"));
-      files.forEach(file => {
-        const subcommand = require(`../interactions/subcommands/${folder}/${file}`);
+  async readSubcommands(client) {
+    const folders = readdirSync("./src/interactions/subcommands");
+    for (const folder of folders) {
+      const files = readdirSync(`./src/interactions/subcommands/${folder}`).filter(file => file.endsWith(".js"));
+      for (const file of files) {
+        const subcommand = (await import(`../interactions/subcommands/${folder}/${file}`)).default;
         client.subcommands.set(`${folder}/${subcommand.name}`, subcommand);
-      });
-    });
+      }
+    }
     console.log(`Loaded ${client.subcommands.size} subcommands`);
   },
 
-  readMessageComponents(client) {
-    const folders = fs.readdirSync("./src/interactions/messageComponents");
-    folders.forEach(folder => {
-      const files = fs.readdirSync(`./src/interactions/messageComponents/${folder}`).filter(file => file.endsWith(".js"));
-      files.forEach(file => {
-        const component = require(`../interactions/messageComponents/${folder}/${file}`);
+  async readMessageComponents(client) {
+    const folders = readdirSync("./src/interactions/messageComponents");
+    for (const folder of folders) {
+      const files = readdirSync(`./src/interactions/messageComponents/${folder}`).filter(file => file.endsWith(".js"));
+      for (const file of files) {
+        const component = (await import(`../interactions/messageComponents/${folder}/${file}`)).default;
         client.messageComponents.set(component.name, component);
-      });
-    });
+      }
+    }
     console.log(`Loaded ${client.messageComponents.size} message components`);
   },
 
-  readSpecialChannels(client) {
-    const files = fs.readdirSync("./src/channels").filter(file => file.endsWith(".js"));
-    files.forEach(file => {
-      const channel = require(`../channels/${file}`);
+  async readSpecialChannels(client) {
+    const files = readdirSync("./src/channels").filter(file => file.endsWith(".js"));
+    for (const file of files) {
+      const channel = (await import(`../channels/${file}`)).default;
       client.specialChannels.set(channel.id, channel);
-    });
+    }
     console.log(`Loaded ${client.specialChannels.size} special channels`);
   },
 
-  readSpecialForums(client) {
-    const files = fs.readdirSync("./src/forums").filter(file => file.endsWith(".js"));
+  async readSpecialForums(client) {
+    const files = readdirSync("./src/forums").filter(file => file.endsWith(".js"));
     const toInit = [];
-    files.forEach(file => {
-      const forum = require(`../forums/${file}`);
+    for (const file of files) {
+      const forum = (await import(`../forums/${file}`)).default;
       if (forum.init) toInit.push(forum.init);
       client.specialForums.set(forum.id, forum);
-    });
+    }
     if (toInit.length) client.once("ready", async (cl) => {
       for (const execute of toInit) {
         try {
@@ -78,12 +78,12 @@ module.exports = {
     console.log(`Loaded ${client.specialForums.size} special forums`);
   },
 
-  readNavigatorChannels(client) {
-    const files = fs.readdirSync("./src/navigatorChannels").filter(file => file.endsWith(".js"));
-    files.forEach(file => {
-      const channel = require(`../navigatorChannels/${file}`);
+  async readNavigatorChannels(client) {
+    const files = readdirSync("./src/navigatorChannels").filter(file => file.endsWith(".js"));
+    for (const file of files) {
+      const channel = (await import(`../navigatorChannels/${file}`)).default;
       client.navigatorChannels.set(channel.id, channel);
-    });
+    }
     console.log(`Loaded ${client.navigatorChannels.size} navigator channels`);
   },
 

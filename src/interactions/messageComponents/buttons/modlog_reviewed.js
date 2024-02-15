@@ -1,6 +1,6 @@
-const { ButtonStyle } = require("discord.js");
+import { ButtonStyle } from "discord.js";
 
-module.exports = {
+export default {
   name: "modlog_reviewed",
   execute(_, interaction) {
     const message = interaction.message;

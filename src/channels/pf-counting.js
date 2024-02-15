@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   id: "1076845847813292082",
   disableReplies: true,
   async execute(client, message) {

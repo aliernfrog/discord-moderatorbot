@@ -1,6 +1,6 @@
-const { ApplicationCommandType, PermissionFlagsBits } = require("discord.js");
+import { ApplicationCommandType, PermissionFlagsBits } from "discord.js";
 
-module.exports = {
+export default {
   data: {
     name: "Emit message",
     type: ApplicationCommandType.Message,

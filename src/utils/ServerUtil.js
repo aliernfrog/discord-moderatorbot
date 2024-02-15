@@ -1,11 +1,11 @@
-const http = require("http");
+import { createServer } from "http";
 let shouldBeReady = false;
 
 const port = process.env.PORT;
 
-function start(client) {
+export function start(client) {
   if (!port) return console.warn("Port not specified, not starting server");
-  const server = http.createServer(function(req,res) {
+  const server = createServer(function(req,res) {
     listen(req, res, client);
   });
   server.listen(port, () => {
@@ -29,5 +29,3 @@ function listen(req, res, client) {
     }
   }
 }
-
-module.exports.start = start;

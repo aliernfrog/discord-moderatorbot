@@ -1,6 +1,6 @@
-const { ApplicationCommandOptionType } = require("discord.js");
+import { ApplicationCommandOptionType } from "discord.js";
 
-module.exports = {
+export default {
   data: {
     name: "counting",
     description: "Sends information about counting of current server.",

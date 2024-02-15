@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   name: "set-user-data",
   async execute(client, interaction) {
     const user = interaction.options.getUser("user");

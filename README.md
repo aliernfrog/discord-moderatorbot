@@ -10,7 +10,7 @@ A simple Discord moderation bot
 ## #️⃣ Channel file
 `src/channels/someChannel.js`
 ```js
-module.exports = {
+export default {
   id: String, //id of the channel
   mediaOnly: Boolean, //deletes messages that don't have attachments
   linksOnly: Boolean, //deletes messages that don't have links
@@ -29,7 +29,7 @@ module.exports = {
 `src/interactions/commands/someFolder/someCommand.js`<br>
 subcommands: `src/interactions/subcommands/parentCommand/someSubcommand.js`
 ```js
-module.exports = {
+export default {
   data: ApplicationCommandData, //see https://discord.js.org/#/docs/discord.js/main/typedef/ApplicationCommandData
   guildOnly: Boolean, //only allows the command in guilds
   permissions: PermissionResolvable, //permission user needs to use the command, see https://discord.js.org/#/docs/discord.js/main/typedef/PermissionResolvable

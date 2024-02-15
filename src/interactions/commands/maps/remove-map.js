@@ -1,6 +1,6 @@
-const { ApplicationCommandOptionType, PermissionFlagsBits } = require("discord.js");
+import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
 
-module.exports = {
+export default {
   data: {
     name: "remove-map",
     description: "Removes a map.",

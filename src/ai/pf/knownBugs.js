@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     name: "SSL CA certificate error",
     thread: "https://discord.com/channels/752538330528481351/1032276983331180648/1032276983331180648",

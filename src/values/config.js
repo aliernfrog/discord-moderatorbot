@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   token: process.env.DISCORD_TOKEN,
   dbUri: process.env.DB_URI,
   managers: process.env.MANAGERS.split("_"),

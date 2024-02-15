@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   id: "855252920961728552",
   linksOnly: true/*,
   cooldown: {

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   name: "set-milestone-data",
   async execute(client, interaction) {
     const milestone = interaction.options.getString("milestone");
