@@ -7,7 +7,7 @@ export default {
   name: "messageCreate",
   execute(client, message) {
     handleSpecialChannel(client, message);
-    navigatorChannels(client, message);
+    handleNavigatorChannel(client, message);
     handleManagerEval(client, message);
 
     if (message.guild?.id == "752538330528481351") {
