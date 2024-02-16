@@ -1,8 +1,9 @@
 import { EmbedBuilder } from "discord.js";
 import { readdirSync } from "fs";
+import { guildData } from "../db/db.js";
 import config from "../values/config.js";
 
-export default {
+const utils = {
   async readEvents(client) {
     const files = readdirSync("./src/events").filter(file => file.endsWith(".js"));
     for (const file of files) {
@@ -159,5 +160,36 @@ export default {
     leaders.slice(0,10).forEach(map => fields.push({name: `• \`${map.mapName.replaceAll("`","")}\` - ${map.totalVotes} votes - by <@${map.authorId}>`, value: `[View map](${map.link})`}));
     embed.addFields(fields);
     return embed;
+  },
+  
+  generateFAQMessage(faq, guild) {
+    const titles = faq.map(
+      (q, i) => `### **${i+1}.** [${q.title}](https://discord.com/channels/${guild?.id}/${q.channelId}/${q.messageId})`
+    );
+    return [
+      "## ❓ FAQ",
+      "Click questions to see their answers.",
+      "",
+      titles.join("\n\n")
+    ].join("\n");
+  },
+  
+  generateQuestionMessage(question) {
+    return [
+      `## ❓ ${question.title}`,
+      question.description
+    ].join("\n");
+  },
+  
+  async updateFAQMessage(guild) {
+    const data = await guildData(guild.id);
+    const faqData = data.faq;
+    const faqChannel = await guild.channels.fetch(faqData.channelId);
+    const faqMessage = await faqChannel.messages.fetch(faqData.messageId);
+    return await faqMessage.edit({
+      content: utils.generateFAQMessage(faqData.faq, guild)
+    });
   }
 }
+
+export default utils;
