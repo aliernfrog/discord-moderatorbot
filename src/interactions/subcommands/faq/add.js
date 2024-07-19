@@ -20,7 +20,7 @@ export default {
     const message = await thread.send(client.f.generateQuestionMessage(question));
     
     question.channelId = thread.id;
-    question.messageId = thread.id;
+    question.messageId = message.id;
     
     faqData.faq ??= [];
     faqData.faq.push(question);
