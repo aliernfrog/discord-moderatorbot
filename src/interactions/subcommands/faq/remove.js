@@ -13,7 +13,7 @@ export default {
     await data.save();
     await client.f.updateFAQMessage(interaction.guild);
     
-    const thread = interaction.guild.channels.fetch(question.channelId);
+    const thread = await interaction.guild.channels.fetch(question.channelId);
     await thread.delete();
     
     interaction.editReply({
