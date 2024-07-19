@@ -12,18 +12,30 @@ export default {
     const faqData = { ...data.faq }
     
     const question = faqData.faq[index];
+    const titleChanged = title && question.title !== title;
     if (title) question.title = title;
     if (description) question.description = description;
     if (regex) question.regex = regex;
+    
+    const msg = client.f.generateQuestionMessage(question);
+    let thread = await interaction.guild.channels.fetch(question.channelId);
+    if (titleChanged) {
+      await thread.delete("question title change");
+      thread = await thread.parent.threads.create({
+        name: title.substring(0, 99)
+      });
+      const message = await thread.send(msg);
+      question.channelId = thread.id;
+      question.messageId = message.id;
+    } else {
+      const message = await thread.messages.fetch(question.messageId);
+      await message.edit(msg);
+    }
+    
     faqData.faq[index] = question;
     data.faq = faqData;
-    
-    const thread = await interaction.guild.channels.fetch(question.channelId);
-    const message = await thread.messages.fetch(question.messageId);
-    await message.edit(client.f.generateQuestionMessage(question));
     await data.save();
     await client.f.updateFAQMessage(interaction.guild);
-    if (title) await thread.edit({ name: title });
     
     interaction.editReply({
       content: `Edited question: \`${question.title}\``
