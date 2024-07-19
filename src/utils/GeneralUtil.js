@@ -1,4 +1,4 @@
-import { EmbedBuilder } from "discord.js";
+import { Collection, EmbedBuilder } from "discord.js";
 import { readdirSync } from "fs";
 import config from "../values/config.js";
 
@@ -14,15 +14,18 @@ export default {
   },
 
   async readCommands(client) {
+    const temp = new Collection();
     const folders = readdirSync("./src/interactions/commands");
     for (const folder of folders) {
       const files = readdirSync(`./src/interactions/commands/${folder}`).filter(file => file.endsWith(".js"));
       for (const file of files) {
         const command = (await import(`../interactions/commands/${folder}/${file}`)).default;
-        client.commands.set(command.data.name, command);
+        temp.set(command.data.name, command);
       }
     }
-    console.log(`Loaded ${client.commands.size} commands`);
+    if (client) client.commands = temp;
+    console.log(`Loaded ${temp.size} commands`);
+    return temp;
   },
 
   async readSubcommands(client) {
