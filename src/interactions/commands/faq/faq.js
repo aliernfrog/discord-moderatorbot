@@ -104,7 +104,7 @@ export default {
           },
           {
             name: "to-index",
-            description: "Index to move the question to, questions after this index will be pushed by 1.",
+            description: "Index to swap with the question.",
             type: ApplicationCommandOptionType.Integer,
             minValue: 1,
             required: true
