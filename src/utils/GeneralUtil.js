@@ -108,7 +108,7 @@ const utils = {
       const member = await guild.members.fetch(user.id);
       if (member) return true;
       else return false;
-    } catch (e) {
+    } catch {
       return false;
     }
   },
@@ -153,7 +153,7 @@ const utils = {
         map.link = `https://discord.com/channels/${guildId}/${map.channelId}/${map.messageId}`;
         if (stars > 0) starred.push(map);
         else if (map.totalVotes > 0) leaders.push(map);
-      } catch (_) { /**/ }
+      } catch { /*...*/ }
     }
     const embed = new EmbedBuilder().setTitle("🏆 Map leaderboard").setColor("Random");
     const fields = [];

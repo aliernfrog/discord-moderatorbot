@@ -23,7 +23,7 @@ export default async function execute(client, thread/*, newlyCreated?*/) {
   
   try {
     thread.starterMessage = await thread.fetchStarterMessage();
-  } catch (_) {
+  } catch {
     thread.starterMessage = await thread.awaitMessages({
       filter(msg) { return msg.id === thread.id },
       max: 1,
@@ -36,7 +36,7 @@ export default async function execute(client, thread/*, newlyCreated?*/) {
 
   try {
     thread.starterMessage.author.moderator = thread.permissionsFor(thread.starterMessage.author).has(PermissionFlagsBits.ManageThreads);
-  } catch (_) {
+  } catch {
     thread.starterMessage.author.moderator = false;
   }
 

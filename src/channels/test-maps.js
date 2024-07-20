@@ -4,7 +4,7 @@ const imageExtensions = [".png",".webp",".jpg",".jpeg",".gif"];
 export default {
   id: "968935634838372502",
   async execute(client, message) {
-    const attachments = [...message.attachments.values()] || [];
+    const attachments = [...message.attachments.values()];
     const maps = attachments.filter(attachment => mapExtensions.some(extension => attachment.name.toLowerCase().endsWith(extension)));
     const images = attachments.filter(attachment => imageExtensions.some(extension => attachment.name.toLowerCase().endsWith(extension)));
 
