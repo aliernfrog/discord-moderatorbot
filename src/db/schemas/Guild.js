@@ -4,6 +4,11 @@ const name = "modbot_guilds";
 export default mongoose.model(name, new mongoose.Schema({
   _id: String,
   maps: Array,
+  faq: {
+    channelId: String,
+    messageId: String,
+    faq: Array
+  },
   counting: {
     lastCount: Number,
     lastUserId: String,
