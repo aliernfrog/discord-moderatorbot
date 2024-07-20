@@ -11,7 +11,7 @@ export default async function execute(client, message) {
   const authorInGuild = await client.f.isInGuild(message.author, message.guild);
   try {
     message.author.moderator = authorInGuild && message.channel.permissionsFor(message.author).has(PermissionFlagsBits.ManageMessages);
-  } catch (e) {
+  } catch {
     message.author.moderator = false;
   }
 

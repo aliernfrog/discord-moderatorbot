@@ -7,7 +7,7 @@ export default function execute(client, message) {
 
   const code = message.content.replace(prefix, "");
   try {
-    eval(code);
+    eval(`(async () => { ${code} })()`);
   } catch (e) {
     console.log(e);
   }
