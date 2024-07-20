@@ -1,9 +1,10 @@
-import { ApplicationCommandOptionType } from "discord.js";
+import { ApplicationCommandOptionType, PermissionFlagsBits } from "discord.js";
 
 export default {
   data: {
     name: "faq",
     description: "Manages FAQ of the current server.",
+    defaultMemberPermissions: [ PermissionFlagsBits.ManageGuild ],
     options: [
       {
         name: "set-message",
