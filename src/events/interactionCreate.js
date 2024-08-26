@@ -11,7 +11,7 @@ export default {
         handleCommand(client, interaction);
         break;
       case InteractionType.MessageComponent:
-        handleMessageComponent.execute(client, interaction);
+        handleMessageComponent(client, interaction);
         break;
     }
   }
