@@ -5,7 +5,8 @@ export default {
   execute(client, message) {
     if (!message.flags.has(MessageFlags.IsCrosspost)) return;
     const channel = client.channels.cache.get("855250425794920448");
-
+    message.content = `${message.content ?? ""}\n\n-# Forwarded from Polyfield server`;
+    
     channel.send({
       allowedMentions: { parse: [] },
       content: message.content,
